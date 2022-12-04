@@ -26,8 +26,8 @@ public class OrderedItemAdapter extends RecyclerView.Adapter<OrderedItemHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull OrderedItemHolder holder, int position) {
-        holder.orderedItemName.setText(linksList.get(position).getLinkText());
-        holder.orderedItemQuantity.setText(String.valueOf(linksList.get(position).getLinkURL()));
+        holder.orderedItemName.setText(linksList.get(position).getOrderedItemName());
+        holder.orderedItemQuantity.setText(String.valueOf(linksList.get(position).getOrderedItemQuantity()));
     }
 
     @Override
