@@ -35,14 +35,10 @@ public class OrderedItemsActivity extends AppCompatActivity {
         reference.keepSynced(true);
 
         orderedItemAdapter = new OrderedItemAdapter(orderedItemList, this);
-        addDataItem();
-//        this.orderedItemList.add(new OrderedItem("rice","2"));
-//        this.orderedItemList.add(new OrderedItem("roti","5"));
-//        this.orderedItemList.add(new OrderedItem("bread","7"));
-        showRecyclerView();
-    }
+        this.orderedItemList.add(new OrderedItem("rice","2"));
+        this.orderedItemList.add(new OrderedItem("roti","5"));
+        this.orderedItemList.add(new OrderedItem("bread","7"));
 
-    private void showRecyclerView(){
         orderedItemsRecyclerView = findViewById(R.id.orderedItemsRecyclerView);
 
         //This defines the way in which the RecyclerView is oriented
@@ -51,9 +47,7 @@ public class OrderedItemsActivity extends AppCompatActivity {
         //Associates the adapter with the RecyclerView
 
         orderedItemsRecyclerView.setAdapter(orderedItemAdapter);
-    }
 
-    private void addDataItem(){
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,15 +64,15 @@ public class OrderedItemsActivity extends AppCompatActivity {
                     if (hotelId.equals("1")) {
                         order.setHotelId(hotelId);
                         order.setCompletionStatus(completionStatus);
-                        List<OrderedItem> orderedItemList=new ArrayList<>();
                         for(DataSnapshot od:orderDetails.getChildren()){
                             OrderedItem orderedItem=new OrderedItem();
                             orderedItem.setOrderedItemName(String.valueOf(od.getKey()));
                             orderedItem.setOrderedItemQuantity(String.valueOf(od.getValue()));
                             orderedItemList.add(orderedItem);
                         }
+                        orderedItemAdapter.notifyDataSetChanged();
                     }
-                    orderedItemAdapter.notifyDataSetChanged();
+
                 }
 
             }
