@@ -14,4 +14,20 @@ public class OrderedItem {
     public String getLinkURL(){
         return orderedItemQuantity;
     }
+
+    public String getOrderedItemName() {
+        return orderedItemName;
+    }
+
+    public void setOrderedItemName(String orderedItemName) {
+        this.orderedItemName = orderedItemName;
+    }
+
+    public String getOrderedItemQuantity() {
+        return orderedItemQuantity;
+    }
+
+    public void setOrderedItemQuantity(String orderedItemQuantity) {
+        this.orderedItemQuantity = orderedItemQuantity;
+    }
 }
