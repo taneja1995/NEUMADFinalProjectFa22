@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "73878013823",
+    "firebase_url": "https://foodjunction-5fbe8-default-rtdb.firebaseio.com",
+    "project_id": "foodjunction-5fbe8",
+    "storage_bucket": "foodjunction-5fbe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73878013823:android:90c79adc6eff967eeefc4a",
+        "android_client_info": {
+          "package_name": "com.example.a7_service"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73878013823-vj9tofhosk32q7kicsmgrm3jgjacna4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIsg34dL0VeuWcfim2R44QX_zje_ZSkMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73878013823-vj9tofhosk32q7kicsmgrm3jgjacna4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73878013823:android:63ee0f28bcb47672eefc4a",
+        "android_client_info": {
+          "package_name": "com.example.foodorderingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73878013823-vj9tofhosk32q7kicsmgrm3jgjacna4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIsg34dL0VeuWcfim2R44QX_zje_ZSkMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73878013823-vj9tofhosk32q7kicsmgrm3jgjacna4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

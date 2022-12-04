@@ -8,10 +8,23 @@ public class OrderedItem {
         this.orderedItemName=orderedItemName;
         this.orderedItemQuantity=orderedItemQuantity;
     }
-    public String getLinkText(){
+
+    public OrderedItem() {
+
+    }
+
+    public void setOrderedItemName(String orderedItemName) {
+        this.orderedItemName = orderedItemName;
+    }
+
+    public void setOrderedItemQuantity(String orderedItemQuantity) {
+        this.orderedItemQuantity = orderedItemQuantity;
+    }
+
+    public String getOrderedItemName(){
         return orderedItemName;
     }
-    public String getLinkURL(){
+    public String getOrderedItemQuantity(){
         return orderedItemQuantity;
     }
 }
