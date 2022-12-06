@@ -51,7 +51,8 @@
                 android:value="" />
         </activity>
 
-      <activity android:name=".PaymentActivity"/>
+      <activity android:name=".OrderAmount"/>
+        <activity android:name=".MyOrderActivity"/>
 
     </application>
 

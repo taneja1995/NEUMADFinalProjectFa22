@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void paymentBtn(View view){
-        Intent intent = new Intent(this, PaymentActivity.class);
+    public void checkoutBtn(View view){
+        Intent intent = new Intent(this, OrderAmount.class);
         startActivity(intent);
     }
 }
