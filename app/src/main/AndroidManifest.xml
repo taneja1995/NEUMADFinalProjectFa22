@@ -51,6 +51,8 @@
                 android:value="" />
         </activity>
 
+      <activity android:name=".PaymentActivity"/>
+
     </application>
 
 </manifest>
