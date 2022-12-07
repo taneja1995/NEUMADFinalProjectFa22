@@ -23,4 +23,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MenuListActivity.class);
         startActivity(intent);
     }
+
+    public void checkoutBtn(View view){
+        Intent intent = new Intent(this, OrderAmount.class);
+        startActivity(intent);
+    }
 }

@@ -51,6 +51,9 @@
                 android:value="" />
         </activity>
 
+      <activity android:name=".OrderAmount"/>
+        <activity android:name=".MyOrderActivity"/>
+
     </application>
 
 </manifest>
