@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Food Junction</string>
+    <string name="restaurantlist">RestaurantList</string>
 </resources>

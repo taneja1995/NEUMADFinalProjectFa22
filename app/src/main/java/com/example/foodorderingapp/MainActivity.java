@@ -28,4 +28,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OrderAmount.class);
         startActivity(intent);
     }
+
+    public void RestaurantListButton(View view){
+        Intent intent = new Intent(this, RestaurantListActivity.class);
+        startActivity(intent);
+    }
 }
