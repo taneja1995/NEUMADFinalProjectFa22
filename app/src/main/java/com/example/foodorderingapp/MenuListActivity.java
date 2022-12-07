@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MenuListActivity extends AppCompatActivity {
 
-    TextView noOfItem;
+    TextView noOfItem,restaurantName;
     private List<OrderedItem> menuLists = new ArrayList<OrderedItem>();
 
     OrderedItem orderedItem;
@@ -38,11 +38,7 @@ public class MenuListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foodmenu);
 
         noOfItem= (TextView) findViewById(R.id.noOfItem);
-        //this.menuLists.add(new OrderedItem("rice",""));
-       // this.menuList.add(new OrderedItem("roti",""));
-        //this.menuList.add(new OrderedItem("bread",""));
-
-
+        restaurantName=findViewById(R.id.restaurantName);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Restaurant");
         firebaseStorage = FirebaseStorage.getInstance();
@@ -67,9 +63,10 @@ public class MenuListActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     //OrderedItem = new OrderedItem();
                     DataSnapshot menuList = snapshot.child("MenuList");
-                    String ResName=snapshot.getKey();
-                    System.out.println("----------------"+ResName);
-                    if(ResName.equals("Chipotle")){
+                    String resName=snapshot.getKey();
+                    System.out.println("----------------"+resName);
+                    restaurantName.setText("IndianSpices");
+                    if(resName.equals("IndianSpices")){
 
                     for(DataSnapshot menu:menuList.getChildren()) {
                         OrderedItem orderedItem=new OrderedItem();
