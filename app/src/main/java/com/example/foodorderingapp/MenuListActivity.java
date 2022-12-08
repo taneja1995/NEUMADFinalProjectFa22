@@ -21,7 +21,7 @@ import java.util.List;
 
 public class MenuListActivity extends AppCompatActivity {
 
-    TextView noOfItem,restaurantName;
+    TextView restaurantName;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
 
     FoodItems foodItem;
@@ -36,8 +36,6 @@ public class MenuListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmenu);
-
-        noOfItem= (TextView) findViewById(R.id.noOfItem);
         restaurantName=findViewById(R.id.restaurantName);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Restaurant");
@@ -89,18 +87,4 @@ public class MenuListActivity extends AppCompatActivity {
 
         });
     }
-
-   /* public void increment(View v){
-        count++;
-        noOfItem.setText(""+count);
-        orderedItem.setOrderedItemQuantity(String.valueOf(count));
-
-    }
-
-    public void decrement(View v){
-        if(count<0){ count=0;}
-        else{ count--;}
-        noOfItem.setText(""+count);
-        orderedItem.setOrderedItemQuantity(String.valueOf(count));
-    }*/
 }
