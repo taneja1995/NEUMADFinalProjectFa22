@@ -23,4 +23,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MenuListActivity.class);
         startActivity(intent);
     }
+
+    public void BtnMaps(View view){
+        Intent intent = new Intent(this, LocationActivity.class);
+        startActivity(intent);
+    }
+
 }
