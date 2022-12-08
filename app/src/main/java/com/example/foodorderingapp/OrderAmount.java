@@ -15,7 +15,7 @@ public class OrderAmount extends AppCompatActivity {
     }
 
     public void confirmCheckoutBtn(View view){
-        Intent intent = new Intent(this, MyOrderActivity.class);
+        Intent intent = new Intent(this, MyOrdersListActivity.class);
         startActivity(intent);
     }
 }
