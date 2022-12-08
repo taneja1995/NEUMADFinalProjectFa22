@@ -22,9 +22,9 @@ import java.util.List;
 public class MenuListActivity extends AppCompatActivity {
 
     TextView noOfItem,restaurantName;
-    private List<OrderedItem> menuLists = new ArrayList<OrderedItem>();
+    private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
 
-    OrderedItem orderedItem;
+    FoodItems foodItem;
     int count=0;
     RecyclerView menuListRV;
     FirebaseDatabase firebaseDatabase;
@@ -43,7 +43,7 @@ public class MenuListActivity extends AppCompatActivity {
         reference = firebaseDatabase.getReference().child("Restaurant");
         firebaseStorage = FirebaseStorage.getInstance();
         reference.keepSynced(true);
-        menuListAdapter = new MenuListAdapter( menuLists,this);
+        menuListAdapter = new MenuListAdapter( foodItemsList,this);
 
         addDataItem();
         DisplayRecyclerView();
@@ -59,7 +59,7 @@ public class MenuListActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                menuLists.clear();
+                foodItemsList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     //OrderedItem = new OrderedItem();
                     DataSnapshot menuList = snapshot.child("MenuList");
@@ -69,12 +69,12 @@ public class MenuListActivity extends AppCompatActivity {
                     if(resName.equals("IndianSpices")){
 
                     for(DataSnapshot menu:menuList.getChildren()) {
-                        OrderedItem orderedItem=new OrderedItem();
-                        orderedItem.setMenuImage(menu.child("Image").getValue().toString());
-                        orderedItem.setOrderedItemName(menu.getKey());
-                        orderedItem.setPrice(menu.child("Price").getValue().toString());
+                        FoodItems foodItems=new FoodItems();
+                        foodItems.setFoodImage(menu.child("Image").getValue().toString());
+                        foodItems.setFoodItemName(menu.getKey());
+                        foodItems.setFoodPrice(menu.child("Price").getValue().toString());
                         System.out.println("----------------" + menu.getKey() + "--" + menu.child("Price").getValue().toString());
-                        menuLists.add(orderedItem);
+                        foodItemsList.add(foodItems);
                         menuListAdapter.notifyDataSetChanged();
                     }
                     }
