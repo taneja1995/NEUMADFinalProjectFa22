@@ -39,7 +39,7 @@ public class MenuListActivity extends AppCompatActivity {
 
         noOfItem= (TextView) findViewById(R.id.noOfItem);
         //this.menuLists.add(new OrderedItem("rice",""));
-       // this.menuList.add(new OrderedItem("roti",""));
+        // this.menuList.add(new OrderedItem("roti",""));
         //this.menuList.add(new OrderedItem("bread",""));
 
 
@@ -71,15 +71,15 @@ public class MenuListActivity extends AppCompatActivity {
                     System.out.println("----------------"+ResName);
                     if(ResName.equals("Chipotle")){
 
-                    for(DataSnapshot menu:menuList.getChildren()) {
-                        OrderedItem orderedItem=new OrderedItem();
-                        orderedItem.setMenuImage(menu.child("Image").getValue().toString());
-                        orderedItem.setOrderedItemName(menu.getKey());
-                        orderedItem.setPrice(menu.child("Price").getValue().toString());
-                        System.out.println("----------------" + menu.getKey() + "--" + menu.child("Price").getValue().toString());
-                        menuLists.add(orderedItem);
-                        menuListAdapter.notifyDataSetChanged();
-                    }
+                        for(DataSnapshot menu:menuList.getChildren()) {
+                            OrderedItem orderedItem=new OrderedItem();
+                            orderedItem.setMenuImage(menu.child("Image").getValue().toString());
+                            orderedItem.setOrderedItemName(menu.getKey());
+                            orderedItem.setPrice(menu.child("Price").getValue().toString());
+                            System.out.println("----------------" + menu.getKey() + "--" + menu.child("Price").getValue().toString());
+                            menuLists.add(orderedItem);
+                            menuListAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
             }
@@ -97,9 +97,7 @@ public class MenuListActivity extends AppCompatActivity {
         count++;
         noOfItem.setText(""+count);
         orderedItem.setOrderedItemQuantity(String.valueOf(count));
-
     }
-
     public void decrement(View v){
         if(count<0){ count=0;}
         else{ count--;}
