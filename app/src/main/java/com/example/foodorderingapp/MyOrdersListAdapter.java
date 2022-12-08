@@ -1,8 +1,11 @@
 package com.example.foodorderingapp;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,23 +25,37 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
     @NonNull
     @Override
     public MyOrdersListAdapter.MyOrdersListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        return new MyOrdersListAdapter.
+                MyOrdersListHolder(LayoutInflater.from(context).inflate(R.layout.activity_single_user_order, null));
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyOrdersListAdapter.MyOrdersListHolder holder, int position) {
+        Order order= ordersList.get(position);
+        holder.hotelName.setText(ordersList.get(position).getHotelId());
+        holder.orderTime.setText(ordersList.get(position).getOrderedOn());
+        holder.orderCost.setText(ordersList.get(position).getTotalCost());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return ordersList.size();
     }
 
     public class MyOrdersListHolder extends RecyclerView.ViewHolder {
 
+        public TextView hotelName;
+        public TextView orderCost, orderTime;
+        public Button getOrderStatus;
+
         public MyOrdersListHolder(@NonNull View itemView) {
             super(itemView);
+            this.hotelName=itemView.findViewById(R.id.restName_tv);
+            this.orderCost=itemView.findViewById(R.id.orderCost_tv);
+            this.orderTime=itemView.findViewById(R.id.date_tv);
+            this.getOrderStatus=itemView.findViewById(R.id.statusBtn);
 
         }
     }

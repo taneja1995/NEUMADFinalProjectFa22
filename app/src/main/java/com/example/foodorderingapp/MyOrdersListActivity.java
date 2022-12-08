@@ -21,13 +21,12 @@ public class MyOrdersListActivity extends AppCompatActivity {
     private DatabaseReference reference;
     FirebaseStorage firebaseStorage;
 
-    List<Order> orderList= new ArrayList<Order>();
+    List<Order> orderList= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myorders);
-
         ordersListAdapter = new MyOrdersListAdapter( orderList,this);
         displayRecyclerView();
     }
