@@ -1,7 +1,6 @@
 package com.example.foodorderingapp;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,22 +12,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuListHolder>{
-    private final List<OrderedItem> orderedItems;
+    private final List<FoodItems> foodItems;
     private final Context context;
     int count=0;
 
 
 
-    public MenuListAdapter(List<OrderedItem> orderedItems, Context context) {
-        this.orderedItems = orderedItems;
+    public MenuListAdapter(List<FoodItems> foodItems, Context context) {
+        this.foodItems = foodItems;
         this.context = context;
     }
 
@@ -43,14 +39,14 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
 
     @Override
     public void onBindViewHolder(@NonNull MenuListHolder holder, @SuppressLint("RecyclerView") int position) {
-        OrderedItem orderedItem = orderedItems.get(position);
-        System.out.println("//////////"+orderedItems.get(position).getOrderedItemName());
-        holder.orderedItemName.setText(orderedItems.get(position).getOrderedItemName());
-        holder.price.setText(orderedItems.get(position).getPrice());
+        FoodItems orderedItem = foodItems.get(position);
+        System.out.println("//////////"+ foodItems.get(position).getFoodItemName());
+        holder.orderedItemName.setText(foodItems.get(position).getFoodItemName());
+        holder.price.setText(foodItems.get(position).getFoodPrice());
         holder.orderedItemQuantity.setText("0");
         String imageUrl = null;
 
-        imageUrl = orderedItem.getMenuImage();
+        imageUrl = orderedItem.getFoodImage();
         Picasso.get().load(imageUrl).into(holder.foodImage);
         holder.addItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,16 +65,20 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
                 int ItemCount=0;
                 count=0;
                 ItemCount=Integer.parseInt(holder.orderedItemQuantity.getText().toString());
-                if(count<0){count=0;}
-                else {count=ItemCount-1;}
-                holder.orderedItemQuantity.setText(""+count);
+                count=ItemCount;
+                if(count<=0){
+                    holder.orderedItemQuantity.setText("0");
+                }
+                else {count=ItemCount-1;
+                    holder.orderedItemQuantity.setText(""+count);}
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return orderedItems.size();
+        return foodItems.size();
     }
 
     public class MenuListHolder extends RecyclerView.ViewHolder {
