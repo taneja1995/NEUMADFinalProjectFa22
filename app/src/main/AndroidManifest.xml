@@ -53,7 +53,7 @@
 
       <activity android:name=".OrderAmount"/>
         <activity android:name=".MyOrderActivity"/>
-
+        <activity android:name=".RestaurantListActivity"/>
     </application>
 
 </manifest>
