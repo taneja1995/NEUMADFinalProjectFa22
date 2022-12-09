@@ -58,10 +58,12 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     String cost= String.valueOf(snapshot.child("orderedItems").child("price").getValue());
                     String timestamp= String.valueOf(snapshot.child("orderedOn").getValue());
                     String orderedBy= String.valueOf(snapshot.child("orderedBy").getValue());
+                    String status= String.valueOf(snapshot.child("completionStatus").getValue());
                     order.setTotalCost(cost);
                     order.setHotelId(resName);
                     order.setOrderedOn(timestamp);
                     order.setOrderedBy(orderedBy);
+                    order.setCompletionStatus(status);
                     orderList.add(order);
                     ordersListAdapter.notifyDataSetChanged();
 
