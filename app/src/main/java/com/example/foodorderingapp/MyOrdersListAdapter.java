@@ -1,6 +1,7 @@
 package com.example.foodorderingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,12 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
         holder.hotelName.setText(ordersList.get(position).getHotelId());
         holder.orderTime.setText(ordersList.get(position).getOrderedOn());
         holder.orderCost.setText(ordersList.get(position).getTotalCost());
+        String status= ordersList.get(position).getCompletionStatus();
+        holder.itemView.findViewById(R.id.statusBtn).setOnClickListener(view ->{
+            Intent intent = new Intent(view.getContext(), ProgressBarActivity.class);
+            intent.putExtra("status",status);
+            context.startActivity(intent);
+        });
 
     }
 
