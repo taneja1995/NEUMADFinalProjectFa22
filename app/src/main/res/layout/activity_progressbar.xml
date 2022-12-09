@@ -27,7 +27,6 @@
         android:layout_marginTop="76dp"
         android:layout_marginEnd="106dp"
         android:layout_marginBottom="356dp"
-        android:text="Your order is still is in progress!!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
