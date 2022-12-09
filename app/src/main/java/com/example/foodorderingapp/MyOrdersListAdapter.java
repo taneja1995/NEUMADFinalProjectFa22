@@ -41,6 +41,7 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
         holder.itemView.findViewById(R.id.statusBtn).setOnClickListener(view ->{
             Intent intent = new Intent(view.getContext(), ProgressBarActivity.class);
             intent.putExtra("status",status);
+            System.out.println("the status in holder is "+ status);
             context.startActivity(intent);
         });
 
