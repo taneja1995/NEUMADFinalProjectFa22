@@ -1,5 +1,6 @@
 package com.example.foodorderingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuListActivity extends AppCompatActivity {
+
+    @Override
+    protected void onNewIntent (Intent intent) {
+        super.onNewIntent(intent) ;
+        Bundle extras = intent.getExtras() ;
+        if (extras != null ) {
+            if (extras.containsKey( "my_string_data" )) {
+                String msg = extras.getString( "my_string_data" ) ;
+                System.out.println(msg);
+            }
+        }
+    }
 
     TextView restaurantName;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
