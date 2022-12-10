@@ -34,5 +34,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void RestaurantOrdersButton(View view){
+        Intent intent = new Intent(this, RestorderReceiverActivity.class);
+        startActivity(intent);
+    }
 
 }
