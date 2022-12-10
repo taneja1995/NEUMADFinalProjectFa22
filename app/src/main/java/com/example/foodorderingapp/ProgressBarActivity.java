@@ -100,7 +100,7 @@ public class ProgressBarActivity extends AppCompatActivity {
     }
 
     public void goToChatScreen(View view){
-        Intent intent = new Intent(this, OrderAmount.class);
+        Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);
     }
 }
