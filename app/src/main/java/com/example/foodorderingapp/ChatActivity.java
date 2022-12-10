@@ -1,5 +1,8 @@
 package com.example.foodorderingapp;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,12 +29,28 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
     FirebaseStorage firebaseStorage;
+    Message message= new Message();
+    Button sendMessBtn;
+    EditText inputMess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference().child("Message");
+        firebaseStorage = FirebaseStorage.getInstance();
+        reference.keepSynced(true);
         chatActivityAdapter = new ChatActivityAdapter( messageList,this);
+        sendMessBtn= findViewById(R.id.send_btn);
+        inputMess= findViewById(R.id.input_message);
+
+        sendMessBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToFirebase();
+            }
+        });
         addDataItem();
         displayRecyclerView();
     }
@@ -42,20 +61,16 @@ public class ChatActivity extends AppCompatActivity {
         chatsRV.setAdapter(chatActivityAdapter);
     }
 
-
     private void addToFirebase(){
-        firebaseDbRef = FirebaseDatabase.getInstance().getReference().child("Order");
+        reference = FirebaseDatabase.getInstance().getReference().child("Message");
         Date currentTime = Calendar.getInstance().getTime();
-        String id = firebaseDbRef.push().getKey();
-        order.setOrderedOn(currentTime.toString());
-        order.setOrderedBy("ananth");
-        // get the hotel Id from the restaurant selected in rest page.
-        order.setHotelId("Curry & Spice");
-        order.setCompletionStatus("In Progress");
-        // calculate the total cost from the order amount activity.
-        order.setTotalCost("$30");
+        String id = reference.push().getKey();
+        message.setSentOn(currentTime.toString());
+        message.setMessage(inputMess.getText().toString());
+        message.setUserType("Sender");
+        System.out.println(" the message after adding to firebase is "+message.getUserType());
         // get ordered items from menu list selected.
-        firebaseDbRef.child(id).setValue(order);
+        reference.child(id).setValue(message);
     }
 
     private void addDataItem() {
@@ -66,19 +81,14 @@ public class ChatActivity extends AppCompatActivity {
                 messageList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     message= new Message();
-                    String orderName=snapshot.getKey();
-                    String resName= String.valueOf(snapshot.child("hotelId").getValue());
-                    String cost= String.valueOf(snapshot.child("orderedItems").child("price").getValue());
-                    String timestamp= String.valueOf(snapshot.child("orderedOn").getValue());
-                    String orderedBy= String.valueOf(snapshot.child("orderedBy").getValue());
-                    String status= String.valueOf(snapshot.child("completionStatus").getValue());
-                    order.setTotalCost(cost);
-                    order.setHotelId(resName);
-                    order.setOrderedOn(timestamp);
-                    order.setOrderedBy(orderedBy);
-                    order.setCompletionStatus(status);
-                    orderList.add(order);
-                    ordersListAdapter.notifyDataSetChanged();
+                    //String orderName=snapshot.getKey();
+                    String messg= String.valueOf(snapshot.child("message").getValue());
+                    String userType= String.valueOf(snapshot.child("userType").getValue());
+                    message.setMessage(messg);
+                    message.setUserType(userType);
+                    messageList.add(message);
+                    System.out.println(" the message type is display firebase "+ message.getUserType());
+                    chatActivityAdapter.notifyDataSetChanged();
 
                 }
             }

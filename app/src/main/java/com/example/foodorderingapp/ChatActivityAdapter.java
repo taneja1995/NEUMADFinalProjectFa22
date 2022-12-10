@@ -62,6 +62,8 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     public int getItemViewType(int position){
 
         Message message= messageList.get(position);
+        System.out.println("the size of message list is "+ messageList.size());
+        System.out.println(" The message is "+ message.getMessage() + message.getUserType());
         if(message.getUserType().equals("Sender")) {
             return sender_view;
         }
