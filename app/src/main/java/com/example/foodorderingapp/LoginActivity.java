@@ -11,11 +11,26 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,8 +65,77 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void sendNotification(){
+    private boolean checkTime(String time){
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("EEE MM dd HH:mm:ss z yyyy");
+        Date ordered = null;
+        try {
+            ordered = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long diff = currentTime.getTime() - ordered.getTime();
+        long diffSeconds = diff / 1000 % 60;
+        if(diffSeconds>100){
+            System.out.println("aaaaa");
+            return true;
+        }
+        else{
+            System.out.println("bbbbbb");
+            return false;
+        }
+    }
 
+    public void getDataFirebase(){
+        String username="ananth";
+        FirebaseDatabase firebaseDatabase;
+        DatabaseReference reference;
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference().child("Order");
+        reference.keepSynced(true);
+        Map<String,Integer> orderedItemList = new HashMap<>();
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Order order = null;
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    order = new Order();
+                    String user=String.valueOf(snapshot.child("orderedBy").getValue());
+                    String hotelId = String.valueOf(snapshot.child("hotelId").getValue());
+                    String completionStatus
+                            = String.valueOf(snapshot.child("completionStatus").getValue());
+                    String time = String.valueOf(snapshot.child("orderedOn").getValue());
+                    DataSnapshot orderDetails = snapshot.child("orderedItems");
+
+                    if (user.equals(username) && checkTime(time)) {
+                        order.setHotelId(hotelId);
+                        order.setCompletionStatus(completionStatus);
+                        for(DataSnapshot od:orderDetails.getChildren()){
+                            orderedItemList.put(String.valueOf(od.getKey()),orderedItemList.getOrDefault(String.valueOf(od.getKey()),0)+1);
+                        }
+                        Map.Entry<String, Integer> maxEntry = null;
+                        for (Map.Entry<String, Integer> entry : orderedItemList.entrySet())
+                        {
+                            if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
+                            {
+                                maxEntry = entry;
+                            }
+                        }
+                        System.out.println(maxEntry.getKey());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void sendNotification(){
 
         Intent intentPresent = new Intent(this, MenuListActivity.class);
         intentPresent.putExtra("my_string_data", "Hello, this is my string data!");
@@ -75,10 +159,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startTracking(){
-        // Create a new Handler object that runs on the main thread
         Handler handler = new Handler(Looper.getMainLooper());
 
-// Create a Runnable that generates the notification
         final int[] count = {0};
         Runnable runnable = new Runnable() {
             @Override
@@ -91,8 +173,10 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+                System.out.println("aaaaaaa");
+                getDataFirebase();
                 // Generate the notification here
-                sendNotification();
+//                sendNotification();
                 // Post the Runnable again after 10 seconds
                 handler.postDelayed(this, 1000);
             }
