@@ -31,7 +31,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     @Override
     public RestaurantListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new RestaurantListHolder(LayoutInflater.from(context).inflate(R.layout.activity_restaurantdetail, null));
+        return new RestaurantListHolder(LayoutInflater.from(context).inflate(R.layout.restaurantdetail, null));
     }
 
     @Override
