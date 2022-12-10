@@ -11,12 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapter.MyOrdersListHolder>{
 
     private final List<Order> ordersList;
     private final Context context;
+    DatabaseReference firebaseDbRef;
 
     public MyOrdersListAdapter(List<Order> ordersList, Context context) {
         this.ordersList=ordersList;
@@ -33,6 +37,8 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyOrdersListHolder holder, int position) {
+        firebaseDbRef = FirebaseDatabase.getInstance().getReference().child("Order");
+        String orderId = firebaseDbRef.push().getKey();
         Order order= ordersList.get(position);
         holder.hotelName.setText(ordersList.get(position).getHotelId());
         holder.orderTime.setText(ordersList.get(position).getOrderedOn());
@@ -40,8 +46,8 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
         String status= ordersList.get(position).getCompletionStatus();
         holder.itemView.findViewById(R.id.statusBtn).setOnClickListener(view ->{
             Intent intent = new Intent(view.getContext(), ProgressBarActivity.class);
-            intent.putExtra("status",order.toString());
-            System.out.println("the status in holder is "+ order.toString());
+            intent.putExtra("orderId",orderId);
+            //System.out.println("the status in holder is "+ order);
             context.startActivity(intent);
         });
 

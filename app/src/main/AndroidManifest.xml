@@ -55,6 +55,7 @@
         </activity>
         <activity android:name=".MyOrdersListActivity"/>
         <activity android:name=".OrderAmount"/>
+        <activity android:name=".ChatActivity"/>
         <activity android:name=".ProgressBarActivity"/>
     </application>
 
