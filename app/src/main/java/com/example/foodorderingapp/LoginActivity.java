@@ -14,7 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class LoginActivity extends AppCompatActivity {
 
     DatabaseReference userRef;
-   // MyApplication myApplication;
+    com.example.foodorderingapp.MyApplication myApplication;
     DatabaseReference firebaseDbRef;
     EditText userName;
     Button loginBtn;
@@ -30,20 +30,22 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  insertUserData();
+                insertUserData();
                 Intent intent= new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-   /* private void insertUserData() {
+     private void insertUserData() {
         String user=userName.getText().toString();
         UserData userData=new UserData(user);
         userData.setUserName(user);
-        ((com.example.foodorderingapp.MyApplication) this.getApplication()).setUserName(user);
-        userRef.child(user).setValue(userData);
-    }*/
+        String id = userRef.push().getKey();
+        ((MyApplication) this.getApplication()).setUserName(user);
+        ((MyApplication) this.getApplication()).setUserId(id);
+        userRef.child(id).setValue(userData);
+    }
 
 
     public void signup(View view){
