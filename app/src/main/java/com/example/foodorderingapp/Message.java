@@ -4,7 +4,7 @@ public class Message {
 
     private String message;
     private String sentOn;
-    private String userType;
+    private String username;
 
     public String getMessage() {
         return message;
@@ -22,11 +22,11 @@ public class Message {
         this.sentOn = sentOn;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

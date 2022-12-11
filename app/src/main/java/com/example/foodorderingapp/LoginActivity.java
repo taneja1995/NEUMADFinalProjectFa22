@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         String id = userRef.push().getKey();
         ((MyApplication) this.getApplication()).setUserName(user);
         ((MyApplication) this.getApplication()).setUserId(id);
+        System.out.println(" the username is from login is"+ ((MyApplication) this.getApplication()).getUserName());
         userRef.child(id).setValue(userData);
     }
 

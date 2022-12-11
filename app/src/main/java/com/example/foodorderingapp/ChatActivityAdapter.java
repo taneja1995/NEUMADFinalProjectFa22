@@ -17,6 +17,7 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     private List<Message> messageList;
     private int sender_view= 1;
     private int receiver_view=0;
+    MyApplication application= new MyApplication();
 
 
     public ChatActivityAdapter(List<Message> messageList, Context context){
@@ -31,6 +32,7 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if(viewType == sender_view){
+            System.out.println(" isnide the sender view holder");
             return new
                     ChatActivityAdapter.SentMessageHolder(LayoutInflater.from(context).inflate(R.layout.activity_sender_item, null));
 
@@ -45,7 +47,8 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
          Message message= messageList.get(position);
-         if(message.getUserType().equals("Sender")){
+        String name= ((MyApplication) context.getApplicationContext()).getUserName();
+         if(message.getUsername().equals(name)){
              ((SentMessageHolder)holder).sentMessage.setText(message.getMessage());
          }
          else{
@@ -62,9 +65,10 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     public int getItemViewType(int position){
 
         Message message= messageList.get(position);
-        System.out.println("the size of message list is "+ messageList.size());
-        System.out.println(" The message is "+ message.getMessage() + message.getUserType());
-        if(message.getUserType().equals("Sender")) {
+        String name= ((MyApplication) context.getApplicationContext()).getUserName();
+        System.out.println(" the name form context is "+name);
+        if(message.getUsername().equals(name)) {
+            System.out.println(" he sender view is "+ sender_view);
             return sender_view;
         }
         else{
