@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/drawable/gender_checked_background.xml" value="0.17" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_foodmenu.xml" value="0.264" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_location.xml" value="0.20108695652173914" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_login.xml" value="0.2" />
@@ -11,8 +12,14 @@
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_myorder.xml" value="0.1" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_ordered_items.xml" value="0.18072916666666666" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_progressbar.xml" value="0.1" />
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_receive_notification.xml" value="0.2328125" />
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_receiver_item.xml" value="0.1766304347826087" />
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_sender_item.xml" value="0.1766304347826087" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_signup.xml" value="0.19746376811594202" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_singelmenu.xml" value="0.18614130434782608" />
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_single_user_order.xml" value="0.1766304347826087" />
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_user_type.xml" value="0.1766304347826087" />
+        <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/activity_usertype.xml" value="0.1766304347826087" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/ordered_item.xml" value="0.12082066869300911" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/singel_menu.xml" value="0.536" />
         <entry key="..\:/Priya/MS/CS5520/NEUMADFinalProjectFa22/app/src/main/res/layout/single_menu.xml" value="0.24739583333333334" />

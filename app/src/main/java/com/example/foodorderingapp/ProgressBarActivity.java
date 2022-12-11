@@ -17,16 +17,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProgressBarActivity extends AppCompatActivity {
 
     int progress=0;
     String orderId=null;
     private ProgressBar progressBar;
-    private Button btn;
+    private Button btn,mapsBtn;
     private TextView status;
     FirebaseStorage firebaseStorage;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference2;
+
+    public static String latitude = null;
+    public   static String longitude=null;
+    public static String restaurant=null;
+
+
+    private DatabaseReference mapsReference;
+    private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +46,15 @@ public class ProgressBarActivity extends AppCompatActivity {
         progressBar= findViewById(R.id.progressBar);
         btn= findViewById(R.id.checkStatus_btn);
         status=findViewById(R.id.status_tv);
+        mapsBtn=findViewById(R.id.mapsBtn);
         reference2=FirebaseDatabase.getInstance().getReference().child("Order");
         firebaseStorage = FirebaseStorage.getInstance();
+
+
+        mapsReference = FirebaseDatabase.getInstance().getReference().child("Restaurant");
+        firebaseStorage = FirebaseStorage.getInstance();
+        mapsReference.keepSynced(true);
+
         Bundle extras= getIntent().getExtras();
         if(extras!=null){
             orderId = extras.getString("orderId");
@@ -60,6 +78,54 @@ public class ProgressBarActivity extends AppCompatActivity {
                 }
             }
         });*/
+        addDataItem();
+        mapsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showMaps();
+
+            }
+        });
+
+    }
+
+    private void showMaps() {
+        ((MyApplication) this.getApplication()).setRestaurantLatitude(latitude);
+        ((MyApplication) this.getApplication()).setRestaurantLongitude(longitude);
+        ((MyApplication) this.getApplication()).setRestaurantName(restaurant);
+
+        Intent intent= new Intent(ProgressBarActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    private void addDataItem() {
+        mapsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                foodItemsList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    DataSnapshot menuList = snapshot.child("MenuList");
+                    String resName = snapshot.getKey();
+
+                    if (resName.equals(MyApplication.RestaurantName)) {
+                        for (DataSnapshot menu : menuList.getChildren()) {
+                            FoodItems foodItems = new FoodItems();
+                            foodItems.setLatitude(snapshot.child("Latitude").getValue().toString());
+                            foodItems.setLongitude(snapshot.child("Longitude").getValue().toString());
+                            foodItemsList.add(foodItems);
+                            latitude = snapshot.child("Latitude").getValue().toString();
+                            longitude = snapshot.child("Longitude").getValue().toString();
+                            restaurant = resName;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setProgress(){
