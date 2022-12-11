@@ -24,7 +24,7 @@ import java.util.List;
 public class OrderedItemsActivity extends AppCompatActivity {
 
     private List<OrderedItem> orderedItemList = new ArrayList<OrderedItem>();
-    private String orderId="-NIv92ZRvFti6AYRZQ96";
+    private String orderId="";
 
     RecyclerView orderedItemsRecyclerView;
     Order order = null;
@@ -39,6 +39,7 @@ public class OrderedItemsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordered_items);
+        orderId =getIntent().getStringExtra("orderNumber");
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Order").child(orderId);
         reference.keepSynced(true);
