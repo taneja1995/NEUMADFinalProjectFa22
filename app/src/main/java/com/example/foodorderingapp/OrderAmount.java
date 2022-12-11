@@ -48,6 +48,4 @@ public class OrderAmount extends AppCompatActivity {
         Intent intent = new Intent(this, MyOrdersListActivity.class);
         startActivity(intent);
     }
-    // create the order dynamically
-
 }
