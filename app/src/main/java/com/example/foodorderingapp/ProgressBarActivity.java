@@ -69,7 +69,7 @@ public class ProgressBarActivity extends AppCompatActivity {
                 Order order = null;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     order = new Order();
-                    String id =reference2.child("Order").getKey();
+                    String id =String.valueOf(snapshot.getKey());
                     String orderStatus = String.valueOf(snapshot.child("completionStatus").getValue());
                     System.out.println("The order status is "+ orderStatus);
                     System.out.println(" the order id from database is "+ id);
