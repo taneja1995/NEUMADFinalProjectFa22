@@ -15,6 +15,7 @@
         android:layout_marginBottom="25dp"
         android:text="Restaurant Name"
         android:textColor="#070000"
+        android:textSize="18sp"
         android:textColorHighlight="#090000"
         android:textColorLink="#0A0202"
         android:visibility="visible"
@@ -31,6 +32,7 @@
         android:layout_marginEnd="53dp"
         android:layout_marginBottom="31dp"
         android:text="OrderDate"
+        android:textSize="18sp"
         android:textColorHighlight="#090202"
         android:textColorLink="#090101"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
@@ -47,6 +49,7 @@
         android:text="$32"
         android:textColorHighlight="#0D0000"
         android:textColorLink="#090000"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/restName_tv"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,6 +60,7 @@
         android:layout_marginStart="86dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="29dp"
+        android:textSize="18sp"
         android:text="Status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/orderCost_tv"
@@ -69,6 +73,7 @@
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_tv" />
