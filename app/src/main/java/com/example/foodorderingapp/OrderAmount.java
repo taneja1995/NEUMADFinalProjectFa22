@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class OrderAmount extends AppCompatActivity {
     DatabaseReference reference2;
     FirebaseStorage firebaseStorage;
     DatabaseReference firebaseDbRef;
+    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
     Order order=new Order();
     com.example.foodorderingapp.MyApplication myApplication;
     Double totalCost=0.0;
@@ -39,7 +41,8 @@ public class OrderAmount extends AppCompatActivity {
         order.setOrderedBy( ((MyApplication) this.getApplication()).getUserName());
         order.setHotelId(((MyApplication) this.getApplication()).getRestaurantName());
         order.setCompletionStatus("In Progress");
-        totalCost= ((MyApplication) this.getApplication()).getSubTotal()+10+2;
+        totalCost= (((MyApplication) this.getApplication()).getSubTotal()+10+2);
+        decimalFormat.format(totalCost);
         order.setTotalCost(String.valueOf(totalCost));
         StringBuilder orderedItems=new StringBuilder();
         Map<String,String> map = ((MyApplication) this.getApplication()).OrderD;
@@ -64,6 +67,8 @@ public class OrderAmount extends AppCompatActivity {
         itemSubtotal=findViewById(R.id.subtotalVal_tv);
         orderTotal=findViewById(R.id.totalVal_tv);
         Double subTot= ((MyApplication) this.getApplication()).getSubTotal();
+        decimalFormat.format(subTot);
+        System.out.println(" the subtotal is "+ subTot);
         itemSubtotal.setText(String.valueOf(subTot));
         orderTotal.setText(String.valueOf(subTot+10+2));
     }
