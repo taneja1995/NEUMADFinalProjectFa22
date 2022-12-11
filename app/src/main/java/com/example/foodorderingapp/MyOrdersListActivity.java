@@ -81,16 +81,18 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     orderList.add(order);
                     ordersListAdapter.notifyDataSetChanged();
 
-                    System.out.println(loggedInUser);
-                    System.out.println("xoxo"+orderedBy);
+                    System.out.println("G loggedinuser"+loggedInUser);
+                    System.out.println("G  orderedby"+orderedBy);
+                    System.out.println("G  orderkd"+orderId);
+                    System.out.println("NG orderid"+orderName);
 
-                    if(orderedBy.equals(loggedInUser)){
-                    //&& orderName.equals(orderId)// {
+
+                     if(orderedBy.equals(loggedInUser))
                         sendNotification();
                     }
 
                 }
-            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
