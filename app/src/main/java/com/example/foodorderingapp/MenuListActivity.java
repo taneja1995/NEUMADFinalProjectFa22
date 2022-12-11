@@ -77,7 +77,6 @@ public class MenuListActivity extends AppCompatActivity {
         System.out.println("Total Price:........"+myApplication.getTotalPrice());
         System.out.println("Hashmap:........"+myApplication.getOrderD());
 
-
         Intent intent= new Intent(MenuListActivity.this, MapsActivity.class);
         startActivity(intent);
     }
