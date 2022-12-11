@@ -38,6 +38,7 @@ public class LocationActivity extends AppCompatActivity {
     private DatabaseReference reference;
     FirebaseStorage firebaseStorage;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
+    Location currentLocaton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +107,11 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void updateGPS() {
-        fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(LocationActivity.this);
+
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED)
         {
+            fusedLocationProviderClient.setMockLocation(currentLocaton);
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {

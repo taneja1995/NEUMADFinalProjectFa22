@@ -1,7 +1,9 @@
 package com.example.foodorderingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,8 @@ import java.util.List;
 public class MenuListActivity extends AppCompatActivity {
 
     TextView restaurantName;
+    Button confirmOrder;
+    MyApplication myApplication;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
 
     FoodItems foodItem;
@@ -31,12 +35,16 @@ public class MenuListActivity extends AppCompatActivity {
     private DatabaseReference reference;
     FirebaseStorage firebaseStorage;
     MenuListAdapter menuListAdapter;
+    public static String latitude = null;
+    public   static String longitude=null;
+    public static String restaurant=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmenu);
         restaurantName=findViewById(R.id.restaurantName);
+        confirmOrder=findViewById(R.id.confirmOrder);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Restaurant");
         firebaseStorage = FirebaseStorage.getInstance();
@@ -44,10 +52,30 @@ public class MenuListActivity extends AppCompatActivity {
         menuListAdapter = new MenuListAdapter( foodItemsList,this);
 
         addDataItem();
+        //System.out.println("Lati--"+latitude+"Long--"+longitude);
+
         DisplayRecyclerView();
+        confirmOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //insertUserData();
+                showMaps();
+            }
+        });
     }
 
+    private void showMaps() {
+        ((MyApplication) this.getApplication()).setRestaurantLatitude(latitude);
+        ((MyApplication) this.getApplication()).setRestaurantLongitude(longitude);
+        ((MyApplication) this.getApplication()).setRestaurantName(restaurant);
+        System.out.println("********"+latitude+"**********"+longitude+"********"+restaurant);
+        Intent intent= new Intent(MenuListActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+
     private void DisplayRecyclerView() {
+
         menuListRV = findViewById(R.id.menuListRV);
         menuListRV.setLayoutManager(new LinearLayoutManager(this));
         menuListRV.setAdapter(menuListAdapter);
@@ -64,15 +92,21 @@ public class MenuListActivity extends AppCompatActivity {
                     String resName=snapshot.getKey();
                     System.out.println("----------------"+resName);
                     restaurantName.setText("IndianSpices");
-                    if(resName.equals("IndianSpices")){
 
+                    if(resName.equals("IndianSpices")){
                     for(DataSnapshot menu:menuList.getChildren()) {
                         FoodItems foodItems=new FoodItems();
                         foodItems.setFoodImage(menu.child("Image").getValue().toString());
                         foodItems.setFoodItemName(menu.getKey());
                         foodItems.setFoodPrice(menu.child("Price").getValue().toString());
+                        foodItems.setLatitude(snapshot.child("Latitude").getValue().toString());
+                        foodItems.setLongitude(snapshot.child("Longitude").getValue().toString());
+                        System.out.println("Latitude--"+foodItems.getLatitude()+"--Longitude--"+foodItems.getLongitude());
                         System.out.println("----------------" + menu.getKey() + "--" + menu.child("Price").getValue().toString());
                         foodItemsList.add(foodItems);
+                        latitude=snapshot.child("Latitude").getValue().toString();
+                        longitude=snapshot.child("Longitude").getValue().toString();
+                        restaurant=resName;
                         menuListAdapter.notifyDataSetChanged();
                     }
                     }
@@ -86,5 +120,7 @@ public class MenuListActivity extends AppCompatActivity {
 
 
         });
+
     }
+
 }

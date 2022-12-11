@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BtnMaps(View view){
-        Intent intent = new Intent(this, LocationActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 
