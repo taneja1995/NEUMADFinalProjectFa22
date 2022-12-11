@@ -74,7 +74,6 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
         else{
             return receiver_view;
         }
-
     }
 
     public class SentMessageHolder extends RecyclerView.ViewHolder {
