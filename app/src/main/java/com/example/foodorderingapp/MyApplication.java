@@ -67,7 +67,7 @@ public class MyApplication extends Application {
         OrderD = orderD;
     }
 
-    public  double getSubTotal() {
+    public double getSubTotal() {
         return subTotal;
     }
 

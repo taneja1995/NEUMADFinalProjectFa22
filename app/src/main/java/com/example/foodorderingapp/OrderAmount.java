@@ -42,8 +42,7 @@ public class OrderAmount extends AppCompatActivity {
         order.setHotelId(((MyApplication) this.getApplication()).getRestaurantName());
         order.setCompletionStatus("In Progress");
         totalCost= (((MyApplication) this.getApplication()).getSubTotal()+10+2);
-        decimalFormat.format(totalCost);
-        order.setTotalCost(String.valueOf(totalCost));
+        order.setTotalCost(decimalFormat.format(totalCost));
         StringBuilder orderedItems=new StringBuilder();
         Map<String,String> map = ((MyApplication) this.getApplication()).OrderD;
         for(String key :map.keySet()){
@@ -70,7 +69,7 @@ public class OrderAmount extends AppCompatActivity {
         decimalFormat.format(subTot);
         System.out.println(" the subtotal is "+ subTot);
         itemSubtotal.setText(String.valueOf(subTot));
-        orderTotal.setText(String.valueOf(subTot+10+2));
+        orderTotal.setText(String.valueOf(decimalFormat.format(subTot+10.00+2.00)));
     }
 
     public void confirmCheckoutBtn(View view){
