@@ -19,7 +19,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MenuListActivity extends AppCompatActivity {
 
@@ -37,7 +40,6 @@ public class MenuListActivity extends AppCompatActivity {
 
     TextView restaurantName;
     Button confirmOrder;
-    MyApplication myApplication;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
 
     FoodItems foodItem;
@@ -50,6 +52,7 @@ public class MenuListActivity extends AppCompatActivity {
     public static String latitude = null;
     public   static String longitude=null;
     public static String restaurant=null;
+    MyApplication myApplication=new MyApplication();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +68,12 @@ public class MenuListActivity extends AppCompatActivity {
 
         addDataItem();
         DisplayRecyclerView();
+
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showMaps();
+
             }
         });
     }
@@ -78,15 +83,25 @@ public class MenuListActivity extends AppCompatActivity {
         ((MyApplication) this.getApplication()).setRestaurantLongitude(longitude);
         ((MyApplication) this.getApplication()).setRestaurantName(restaurant);
         System.out.println("********"+latitude+"**********"+longitude+"********"+restaurant);
+        System.out.println("Order Details:........"+myApplication.getOrderDetails());
+        System.out.println("Total Price:........"+myApplication.getTotalPrice());
+        System.out.println("Hashmap:........"+myApplication.getOrderD());
+
+
         Intent intent= new Intent(MenuListActivity.this, MapsActivity.class);
         startActivity(intent);
     }
-
 
     private void DisplayRecyclerView() {
 
         menuListRV = findViewById(R.id.menuListRV);
         menuListRV.setLayoutManager(new LinearLayoutManager(this));
+        List<FoodItems> foodIt=foodItemsList;
+
+        for(int i=0;i<foodItemsList.size();i++)
+        {
+
+        }
         menuListRV.setAdapter(menuListAdapter);
     }
 

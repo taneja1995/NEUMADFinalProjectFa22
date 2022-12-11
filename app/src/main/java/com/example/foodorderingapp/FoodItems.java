@@ -1,8 +1,8 @@
 package com.example.foodorderingapp;
 
 public class FoodItems {
-    private String foodItemName;
-    private String foodItemQuantity;
+    public String foodItemName;
+    public static String foodItemQuantity;
     public String foodImage;
     public String foodPrice;
     public String latitude,longitude;
