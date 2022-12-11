@@ -68,7 +68,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     order= new Order();
                     String orderName=snapshot.getKey();
                     String resName= String.valueOf(snapshot.child("hotelId").getValue());
-                    String cost= String.valueOf(snapshot.child("orderedItems").child("price").getValue());
+                    String cost= String.valueOf(snapshot.child("totalCost").getValue());
                     String timestamp= String.valueOf(snapshot.child("orderedOn").getValue());
                     String orderedBy= String.valueOf(snapshot.child("orderedBy").getValue());
                     String status= String.valueOf(snapshot.child("completionStatus").getValue());
