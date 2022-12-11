@@ -1,6 +1,7 @@
 package com.example.foodorderingapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,6 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
     @Override
     public void onBindViewHolder(@NonNull MenuListHolder holder, @SuppressLint("RecyclerView") int position) {
         FoodItems orderedItem = foodItems.get(position);
-        System.out.println("//////////"+ foodItems.get(position).getFoodItemName());
         holder.orderedItemName.setText(foodItems.get(position).getFoodItemName());
         holder.price.setText(foodItems.get(position).getFoodPrice());
         holder.orderedItemQuantity.setText("0");

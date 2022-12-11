@@ -52,13 +52,10 @@ public class MenuListActivity extends AppCompatActivity {
         menuListAdapter = new MenuListAdapter( foodItemsList,this);
 
         addDataItem();
-        //System.out.println("Lati--"+latitude+"Long--"+longitude);
-
         DisplayRecyclerView();
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //insertUserData();
                 showMaps();
             }
         });
@@ -91,9 +88,9 @@ public class MenuListActivity extends AppCompatActivity {
                     DataSnapshot menuList = snapshot.child("MenuList");
                     String resName=snapshot.getKey();
                     System.out.println("----------------"+resName);
-                    restaurantName.setText("Shahs");
+                    restaurantName.setText("Chipotle");
 
-                    if(resName.equals("Shahs")){
+                    if(resName.equals("Chipotle")){
                     for(DataSnapshot menu:menuList.getChildren()) {
                         FoodItems foodItems=new FoodItems();
                         foodItems.setFoodImage(menu.child("Image").getValue().toString());
