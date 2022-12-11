@@ -68,8 +68,8 @@ public class RestorderReceiverActivity extends AppCompatActivity {
                     if(snapshot.child("hotelId").getValue() == null)
                         continue;
 
-                    String hotelId = Objects.requireNonNull(snapshot.child("hotelId").getValue()).toString();
-                    String completionStatus = Objects.requireNonNull(snapshot.child("completionStatus").getValue()).toString();
+                    String hotelId = (snapshot.child("hotelId").getValue()).toString();
+                    String completionStatus = (snapshot.child("completionStatus").getValue()).toString();
 
                     if(hotelId.equals(restaurantName) && completionStatus.equals("In Progress")){
 
@@ -95,7 +95,6 @@ public class RestorderReceiverActivity extends AppCompatActivity {
                         order.setOrderedOn(tempOrderedon);
                         order.setOrderedBy(tempOrderedBy);
                         order.setCompletionStatus(tempCompletionStatus);
-
 
                         restaurantOrdersList.add(order);
                         restorderReceiverAdapter.notifyDataSetChanged();

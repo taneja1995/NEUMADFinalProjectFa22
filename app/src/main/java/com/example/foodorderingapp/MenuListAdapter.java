@@ -79,7 +79,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
                 }
 
                 orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
-                subTotal= subTotal+(Double.parseDouble(orderedItem.getFoodPrice()) * Double.parseDouble(orderedItem.getFoodItemQuantity()));
+                subTotal=(Double.parseDouble(orderedItem.getFoodPrice()) * Double.parseDouble(orderedItem.getFoodItemQuantity()));
                 decimalFormat.format(subTotal);
                 MyApplication.OrderD=orderDe;
                 MyApplication.OrderDetails=orderDetails;

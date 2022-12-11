@@ -23,12 +23,11 @@ import java.util.List;
 public class ProgressBarActivity extends AppCompatActivity {
 
     int progress=0;
-    String orderId=null;
+    String orderStatus=null;
     private ProgressBar progressBar;
     private Button btn,mapsBtn;
     private TextView status;
     FirebaseStorage firebaseStorage;
-    FirebaseDatabase firebaseDatabase;
     DatabaseReference reference2;
 
     public static String latitude = null;
@@ -50,34 +49,39 @@ public class ProgressBarActivity extends AppCompatActivity {
         reference2=FirebaseDatabase.getInstance().getReference().child("Order");
         firebaseStorage = FirebaseStorage.getInstance();
 
-
         mapsReference = FirebaseDatabase.getInstance().getReference().child("Restaurant");
         firebaseStorage = FirebaseStorage.getInstance();
         mapsReference.keepSynced(true);
 
         Bundle extras= getIntent().getExtras();
         if(extras!=null){
-            orderId = extras.getString("orderId");
+            orderStatus = extras.getString("orderStatus");
         }
-        System.out.println(" the order id from the intent is "+orderId);
-        setProgress();
+
+        if(orderStatus.equals("Completed")){
+            status.setText("Your order is complete");
+        }else{
+            status.setText("Your order is in progress");
+        }
+
+        //setProgress();
         // to show the progress bar status for the order based on the status.
-       /* btn.setOnClickListener(new View.OnClickListener() {
+       btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(orderStatus.equals("Completed")){
                     progress=100;
                     progressBar.setProgress(progress);
-                    status.setText("Yipeee!! Your order is prepared! Delicious food is on the way!");
-                    status.setTextColor(Color.BLACK);
+                    //status.setText("Yipeee!! Your order is prepared! Delicious food is on the way!");
+
                 }else{
                     progress=50;
                     progressBar.setProgress(progress);
-                    status.setText("Your order is still in progress! Thanks for your patience!");
-                    status.setTextColor(Color.BLACK);
+                    //status.setText("Your order is still in progress! Thanks for your patience!");
+
                 }
             }
-        });*/
+        });
         addDataItem();
         mapsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,44 +131,6 @@ public class ProgressBarActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void setProgress(){
-        reference2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Order order = null;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    order = new Order();
-                    String id =String.valueOf(snapshot.getKey());
-                    String orderStatus = String.valueOf(snapshot.child("completionStatus").getValue());
-                    System.out.println("The order status is "+ orderStatus);
-                    System.out.println(" the order id from database is "+ id);
-                    System.out.println("The order ID is from intent is "+ orderId);
-                    if (id == orderId) {
-                        if (orderStatus.equals("Completed")) {
-                            progress = 100;
-                            progressBar.setProgress(progress);
-                            status.setText("Yipeee!! Your order is prepared! Delicious food is on the way!");
-                            status.setTextColor(Color.BLACK);
-                        } else {
-                            progress = 50;
-                            progressBar.setProgress(progress);
-                            status.setText("Your order is still in progress! Thanks for your patience!");
-                            status.setTextColor(Color.BLACK);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
-
     public void goToChatScreen(View view){
         Intent intent = new Intent(this, ChatActivity.class);
         startActivity(intent);

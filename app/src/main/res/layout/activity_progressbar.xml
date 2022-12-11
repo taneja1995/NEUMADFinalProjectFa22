@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -33,18 +33,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/status_tv"
-        android:layout_width="75dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="205dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="206dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/chatBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkStatus_btn" />
+                <TextView
+                    android:id="@+id/status_tv"
+                    android:layout_width="75dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="205dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="206dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#070000"
+                    android:textColorHighlight="#0D0000"
+                    android:textColorHint="#0D0C0C"
+                    android:textColorLink="#0D0B0B"
+                    app:layout_constraintBottom_toTopOf="@+id/chatBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkStatus_btn" />
 
     <Button
         android:id="@+id/checkStatus_btn"

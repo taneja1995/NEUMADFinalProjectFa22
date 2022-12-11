@@ -1,6 +1,8 @@
 package com.example.foodorderingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +46,11 @@ public class RestaurantListActivity  extends AppCompatActivity {
         DisplayRecyclerView();
 
 
+    }
+
+    public void goToMyOrders(View view){
+        Intent intent = new Intent(this, MyOrdersListActivity.class);
+        startActivity(intent);
     }
 
     private void addDataItem() {
