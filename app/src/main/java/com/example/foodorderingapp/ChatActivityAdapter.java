@@ -45,7 +45,7 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
          Message message= messageList.get(position);
         String name= ((MyApplication) context.getApplicationContext()).getUserName();
-         if(message.getUsername().equals(name)){
+         if(message.getSender().equals(name)){
              ((SentMessageHolder)holder).sentMessage.setText(message.getMessage());
          }
          else{
@@ -63,7 +63,7 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
 
         Message message= messageList.get(position);
         String name= ((MyApplication) context.getApplicationContext()).getUserName();
-        if(message.getUsername().equals(name)) {
+        if(message.getSender().equals(name)) {
             return sender_view;
         }
         else{

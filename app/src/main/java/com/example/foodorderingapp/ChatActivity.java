@@ -67,7 +67,8 @@ public class ChatActivity extends AppCompatActivity {
         String id = reference.push().getKey();
         message.setSentOn(currentTime.toString());
         message.setMessage(inputMess.getText().toString());
-        message.setUsername(((MyApplication) this.getApplication()).getUserName());
+        message.setSender(((MyApplication) this.getApplication()).getUserName());
+        message.setReceiver(((MyApplication) this.getApplication()).getRestaurantName());
         reference.child(id).setValue(message);
     }
 
@@ -80,9 +81,11 @@ public class ChatActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     message= new Message();
                     String messg= String.valueOf(snapshot.child("message").getValue());
-                    String username= String.valueOf(snapshot.child("username").getValue());
+                    String sender= String.valueOf(snapshot.child("sender").getValue());
+                    String receiver= String.valueOf(snapshot.child("receiver").getValue());
                     message.setMessage(messg);
-                    message.setUsername(username);
+                    message.setSender(sender);
+                    message.setReceiver(receiver);
                     messageList.add(message);
                     chatActivityAdapter.notifyDataSetChanged();
 
