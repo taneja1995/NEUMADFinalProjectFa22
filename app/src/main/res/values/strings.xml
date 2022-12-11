@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Food Junction</string>
+    <string name="channel_description">Notification Channel for the app</string>
+    <string name="channel_id">Channel_team_fourteen</string>
+    <string name="channel_name">Sticker Notification For previous orders</string>
+
 
     <string name="title_activity_maps">MapsActivity</string>
 

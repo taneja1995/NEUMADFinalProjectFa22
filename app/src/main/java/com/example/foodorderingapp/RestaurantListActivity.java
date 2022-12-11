@@ -42,6 +42,8 @@ public class RestaurantListActivity  extends AppCompatActivity {
 
         addDataItem();
         DisplayRecyclerView();
+
+
     }
 
     private void addDataItem() {

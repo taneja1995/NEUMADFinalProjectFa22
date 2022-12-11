@@ -26,6 +26,18 @@ import java.util.Set;
 
 public class MenuListActivity extends AppCompatActivity {
 
+    @Override
+    protected void onNewIntent (Intent intent) {
+        super.onNewIntent(intent) ;
+        Bundle extras = intent.getExtras() ;
+        if (extras != null ) {
+            if (extras.containsKey( "my_string_data" )) {
+                String msg = extras.getString( "my_string_data" ) ;
+                System.out.println(msg);
+            }
+        }
+    }
+
     TextView restaurantName;
     Button confirmOrder;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
