@@ -23,9 +23,9 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
     private final Context context;
     int count=0;
     String orderDetails;
-    MyApplication myApplication=new MyApplication();
+   // MyApplication myApplication=new MyApplication();
     Double totalPrice=0.0;
-    HashMap<String, Integer> orderDe=new HashMap<String, Integer>();
+    HashMap<String, String> orderDe=new HashMap<>();
 
     public MenuListAdapter(List<FoodItems> foodItems, Context context) {
         this.foodItems = foodItems;
@@ -76,11 +76,13 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
                             orderedItem.getFoodPrice());
                 }
 
-
+                orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
                 totalPrice= totalPrice+Double.parseDouble(orderedItem.getFoodPrice());
 
-                myApplication.setOrderDetails(orderDetails);
-                myApplication.setTotalPrice(totalPrice);
+                MyApplication.OrderD=orderDe;
+                MyApplication.OrderDetails=orderDetails;
+                MyApplication.TotalPrice=totalPrice;
+
 
             }
 
@@ -116,9 +118,12 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
                     }
 
                 }
+                orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
                 totalPrice= totalPrice-Double.parseDouble(orderedItem.getFoodPrice());
-                myApplication.setOrderDetails(orderDetails);
-                myApplication.setTotalPrice(totalPrice);
+                MyApplication.OrderD=orderDe;
+                MyApplication.TotalPrice=totalPrice;
+                //myApplication.setOrderDetails(orderDetails);
+                //myApplication.setTotalPrice(totalPrice);
             }
         });
         orderedItem.setFoodItemName(holder.orderedItemName.getText().toString());
