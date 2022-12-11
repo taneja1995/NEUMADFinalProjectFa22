@@ -8,7 +8,7 @@ public class MyApplication extends Application {
     public String UserName;
     public String UserId;
     public String RestaurantLatitude, RestaurantLongitude;
-    public String RestaurantName;
+    public static String RestaurantName;
     public static String OrderDetails;
     public HashMap<String, Integer> OrderD;
     public static double TotalPrice;
