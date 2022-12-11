@@ -25,9 +25,12 @@ public class OrderedItemsActivity extends AppCompatActivity {
 
     private List<OrderedItem> orderedItemList = new ArrayList<OrderedItem>();
     private String orderId="";
+    com.example.foodorderingapp.MyApplication myApplication;
+
 
     RecyclerView orderedItemsRecyclerView;
     Order order = null;
+
 
     FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
@@ -40,6 +43,7 @@ public class OrderedItemsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordered_items);
         orderId =getIntent().getStringExtra("orderNumber");
+        ((MyApplication) this.getApplication()).setCurrentOrderId(orderId);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Order").child(orderId);
         reference.keepSynced(true);

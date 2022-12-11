@@ -8,7 +8,7 @@ public class Order {
     private String orderNo;
     private String completionStatus;
     private String hotelId;
-    private List<OrderedItem> orderedItems;
+    private String orderedItems;
     private String orderedOn;
     private String orderedBy;
 
@@ -31,11 +31,11 @@ public class Order {
         this.hotelId = hotelId;
     }
 
-    public List<OrderedItem> getOrderedItems() {
+    public String getOrderedItems() {
         return orderedItems;
     }
 
-    public void setOrderedItems(List<OrderedItem> orderedItems) {
+    public void setOrderedItems(String orderedItems) {
         this.orderedItems = orderedItems;
     }
     public String getCompletionStatus() {

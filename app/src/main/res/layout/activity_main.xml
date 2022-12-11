@@ -21,80 +21,24 @@
                 android:layout_height="match_parent">
 
                 <Button
-        android:id="@+id/orderedItems"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="40dp"
-        android:onClick="BtnOrderedItems"
-        android:text="Ordered Items"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/menuList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="156dp"
-        android:onClick="BtnMenuList"
-        android:text="Menu List"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderedItems" />
-
-                <Button
-        android:id="@+id/payment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="156dp"
-        android:onClick="checkoutBtn"
-        android:text="Checkout Order"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menuList" />
-
-    <Button
-        android:id="@+id/restaurantList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="300dp"
-        android:onClick="RestaurantListButton"
-        android:text="@string/restaurantlist"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/payment" />
-
-                <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/restaurantList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="147dp"
-                    android:layout_marginTop="67dp"
-                    android:layout_marginEnd="152dp"
-                    android:layout_marginBottom="185dp"
-                    android:onClick="RestaurantOrdersButton"
-                    android:text="resorder"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="100dp"
+                    android:layout_marginBottom="300dp"
+                    android:onClick="RestaurantListButton"
+                    android:text="@string/restaurantlist"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/restaurantList" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
                     android:id="@+id/resstaurantLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="151dp"
-                    android:layout_marginTop="55dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="166dp"
                     android:layout_marginBottom="82dp"
                     android:onClick="RestaurantLoginButton"
@@ -102,10 +46,10 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button3" />
+                    app:layout_constraintTop_toBottomOf="@+id/restaurantList" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+        </LinearLayout>
     </ScrollView>
 
 

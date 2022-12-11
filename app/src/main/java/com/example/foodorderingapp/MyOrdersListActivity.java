@@ -34,6 +34,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     List<Order> orderList= new ArrayList<>();
     String loggedInUser;
+    String orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
         reference = firebaseDatabase.getReference().child("Order");
         firebaseStorage = FirebaseStorage.getInstance();
         loggedInUser =  ((MyApplication) this.getApplication()).getUserName();
+        orderId = ((MyApplication) this.getApplication()).getCurrentOrderId();
         reference.keepSynced(true);
         ordersListAdapter = new MyOrdersListAdapter( orderList,this);
         addDataItem();
@@ -64,7 +66,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
                 orderList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     order= new Order();
-                    //String orderName=snapshot.getKey();
+                    String orderName=snapshot.getKey();
                     String resName= String.valueOf(snapshot.child("hotelId").getValue());
                     String cost= String.valueOf(snapshot.child("orderedItems").child("price").getValue());
                     String timestamp= String.valueOf(snapshot.child("orderedOn").getValue());
@@ -79,7 +81,11 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     orderList.add(order);
                     ordersListAdapter.notifyDataSetChanged();
 
+                    System.out.println(loggedInUser);
+                    System.out.println("xoxo"+orderedBy);
+
                     if(orderedBy.equals(loggedInUser)){
+                    //&& orderName.equals(orderId)// {
                         sendNotification();
                     }
 

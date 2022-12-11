@@ -13,6 +13,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 public class OrderAmount extends AppCompatActivity {
 
@@ -34,6 +35,16 @@ public class OrderAmount extends AppCompatActivity {
         order.setHotelId(application.getRestaurantName());
         order.setCompletionStatus("In Progress");
         order.setTotalCost("$30");
+        StringBuilder orderedItems=new StringBuilder();
+        Map<String,String> map = MyApplication.OrderD;
+        for(String key :map.keySet()){
+            orderedItems.append(key);
+            orderedItems.append(";");
+            orderedItems.append(map.get(key));
+            orderedItems.append("/");
+        }
+        orderedItems.deleteCharAt(orderedItems.length()-1);
+        order.setOrderedItems(orderedItems.toString());
         firebaseDbRef.child(id).setValue(order);
     }
 

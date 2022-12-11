@@ -43,7 +43,7 @@ public class RestorderReceiverActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         reference.keepSynced(true);
         restorderReceiverAdapter = new RestorderReceiverAdapter( restaurantOrdersList,this);
-        restaurantName =   ((MyApplication) this.getApplication()).getRestaurantName();
+        restaurantName =   ((MyApplication) this.getApplication()).getCurrentLoggedInRestaurantName();
 
         System.out.println(restaurantName);
 

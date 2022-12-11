@@ -52,8 +52,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        createNotificationChannel();
-        startTracking();
         userName=findViewById(R.id.email);
         loginBtn=findViewById(R.id.signIn);
         userRef= FirebaseDatabase.getInstance().getReference().child("Customer").child("customerId");
@@ -77,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         ((MyApplication) this.getApplication()).setUserId(id);
         System.out.println(" the username is from login is"+ ((MyApplication) this.getApplication()).getUserName());
         userRef.child(id).setValue(userData);
+        createNotificationChannel();
+        startTracking();
     }
 
 
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void getDataFirebase(){
-        String username="raj";
+        String username=((MyApplication) this.getApplication()).getUserName();
         FirebaseDatabase firebaseDatabase;
         DatabaseReference reference;
         firebaseDatabase = FirebaseDatabase.getInstance();
