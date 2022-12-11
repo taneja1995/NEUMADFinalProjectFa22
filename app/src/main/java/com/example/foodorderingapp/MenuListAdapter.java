@@ -74,6 +74,12 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
 
             }
         });
+
+        orderedItem.setFoodItemName(holder.orderedItemName.getText().toString());
+        orderedItem.setFoodItemQuantity( holder.orderedItemQuantity.getText().toString());
+        orderedItem.setFoodPrice(holder.price.getText().toString());
+
+        System.out.println("Food Item:"+orderedItem.getFoodItemName());
     }
 
     @Override

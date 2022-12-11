@@ -91,9 +91,9 @@ public class MenuListActivity extends AppCompatActivity {
                     DataSnapshot menuList = snapshot.child("MenuList");
                     String resName=snapshot.getKey();
                     System.out.println("----------------"+resName);
-                    restaurantName.setText("IndianSpices");
+                    restaurantName.setText("Shahs");
 
-                    if(resName.equals("IndianSpices")){
+                    if(resName.equals("Shahs")){
                     for(DataSnapshot menu:menuList.getChildren()) {
                         FoodItems foodItems=new FoodItems();
                         foodItems.setFoodImage(menu.child("Image").getValue().toString());

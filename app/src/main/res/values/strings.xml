@@ -2,7 +2,6 @@
     <string name="app_name">Food Junction</string>
 
     <string name="title_activity_maps">MapsActivity</string>
-</resources>
 
     <string name="restaurantlist">RestaurantList</string>
     <string name="hello">Hello</string>
