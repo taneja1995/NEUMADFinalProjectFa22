@@ -65,22 +65,14 @@ public class MenuListActivity extends AppCompatActivity {
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showMaps();
+                checkout();
 
             }
         });
     }
 
-    private void showMaps() {
-        ((MyApplication) this.getApplication()).setRestaurantLatitude(latitude);
-        ((MyApplication) this.getApplication()).setRestaurantLongitude(longitude);
-        ((MyApplication) this.getApplication()).setRestaurantName(restaurant);
-        System.out.println("********"+latitude+"**********"+longitude+"********"+restaurant);
-        System.out.println("Order Details:........"+myApplication.getOrderDetails());
-        System.out.println("Total Price:........"+myApplication.getTotalPrice());
-        //System.out.println("Hashmap:........"+myApplication.getOrderD().size());
-
-        Intent intent= new Intent(MenuListActivity.this, MapsActivity.class);
+    private void checkout() {
+        Intent intent= new Intent(MenuListActivity.this, OrderAmount.class);
         startActivity(intent);
     }
 
