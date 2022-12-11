@@ -17,8 +17,6 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     private List<Message> messageList;
     private int sender_view= 1;
     private int receiver_view=0;
-    MyApplication application= new MyApplication();
-
 
     public ChatActivityAdapter(List<Message> messageList, Context context){
 
@@ -32,7 +30,6 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         if(viewType == sender_view){
-            System.out.println(" isnide the sender view holder");
             return new
                     ChatActivityAdapter.SentMessageHolder(LayoutInflater.from(context).inflate(R.layout.activity_sender_item, null));
 
@@ -66,9 +63,7 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
 
         Message message= messageList.get(position);
         String name= ((MyApplication) context.getApplicationContext()).getUserName();
-        System.out.println(" the name form context is "+name);
         if(message.getUsername().equals(name)) {
-            System.out.println(" he sender view is "+ sender_view);
             return sender_view;
         }
         else{
