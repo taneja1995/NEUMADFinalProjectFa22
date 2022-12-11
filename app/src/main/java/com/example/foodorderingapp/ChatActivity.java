@@ -32,8 +32,6 @@ public class ChatActivity extends AppCompatActivity {
     Message message= new Message();
     Button sendMessBtn;
     EditText inputMess;
-    MyApplication application= new MyApplication();
-    //UserData userData= new UserData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         String id = reference.push().getKey();
         message.setSentOn(currentTime.toString());
         message.setMessage(inputMess.getText().toString());
-        //System.out.println(" teh username from teh application is "+application.getUserName());
         message.setUsername(((MyApplication) this.getApplication()).getUserName());
-        System.out.println(" the user name is ishita1111 "+ message.getUsername());
-        //System.out.println(" the message after adding to firebase is "+message.getUserType());
-        // get ordered items from menu list selected.
         reference.child(id).setValue(message);
     }
 
@@ -85,14 +79,11 @@ public class ChatActivity extends AppCompatActivity {
                 messageList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     message= new Message();
-                    //String orderName=snapshot.getKey();
                     String messg= String.valueOf(snapshot.child("message").getValue());
                     String username= String.valueOf(snapshot.child("username").getValue());
                     message.setMessage(messg);
                     message.setUsername(username);
-                    System.out.println(" the usernae in the message database is "+ username);
                     messageList.add(message);
-                   // System.out.println(" the message type is display firebase "+ message.getUserType());
                     chatActivityAdapter.notifyDataSetChanged();
 
                 }

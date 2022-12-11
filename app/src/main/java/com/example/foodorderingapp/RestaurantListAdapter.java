@@ -50,6 +50,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((MyApplication) context.getApplicationContext()).setRestaurantName(restaurantName);
                 Intent intent = new Intent(view.getContext(), MenuListActivity.class);
                 intent.putExtra("hotelName",restaurantName);
                 //System.out.println("the status in holder is "+ order);
