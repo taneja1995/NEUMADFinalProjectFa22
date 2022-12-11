@@ -1,9 +1,16 @@
 package com.example.foodorderingapp;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,10 +28,12 @@ public class MyOrdersListActivity extends AppCompatActivity {
 
     private RecyclerView myOrdersRV;
     private MyOrdersListAdapter ordersListAdapter;
+    com.example.foodorderingapp.MyApplication myApplication;
     FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
     FirebaseStorage firebaseStorage;
     List<Order> orderList= new ArrayList<>();
+    String loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +42,12 @@ public class MyOrdersListActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Order");
         firebaseStorage = FirebaseStorage.getInstance();
+        loggedInUser =  ((MyApplication) this.getApplication()).getUserName();
         reference.keepSynced(true);
         ordersListAdapter = new MyOrdersListAdapter( orderList,this);
         addDataItem();
         displayRecyclerView();
+        createNotificationChannel();
     }
 
     private void displayRecyclerView() {
@@ -67,6 +78,10 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     orderList.add(order);
                     ordersListAdapter.notifyDataSetChanged();
 
+                    if(orderedBy.equals(loggedInUser)){
+                        sendNotification();
+                    }
+
                 }
             }
             @Override
@@ -75,6 +90,47 @@ public class MyOrdersListActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id), name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void sendNotification(){
+
+        Intent intent = new Intent(this, ReceiveNotificationActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_IMMUTABLE);
+
+        Intent intentPresent = new Intent(this, MyOrdersListActivity.class);
+        PendingIntent pPresenetIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intentPresent, PendingIntent.FLAG_IMMUTABLE);
+
+        String channelId = getString(R.string.channel_id);
+
+
+        Notification noti = new NotificationCompat.Builder(this,channelId)
+
+                .setContentTitle("Order Status")
+                .setContentText("Hey " +loggedInUser +" Your order is in progess")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentIntent(pIntent)
+                .addAction(R.drawable.gender_checked_background, "And more", pPresenetIntent).build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        noti.flags |= Notification.FLAG_AUTO_CANCEL ;
+
+        notificationManager.notify(0, noti);
+
+    }
+
+
+
 
 
 
