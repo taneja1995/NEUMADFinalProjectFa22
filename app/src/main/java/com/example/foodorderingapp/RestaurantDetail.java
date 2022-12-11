@@ -15,7 +15,6 @@ public class RestaurantDetail extends AppCompatActivity {
         this.name = name;
     }
 
-
     public String getImage() {
         return image;
     }

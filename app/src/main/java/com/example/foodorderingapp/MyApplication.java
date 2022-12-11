@@ -37,7 +37,7 @@ public class MyApplication extends Application {
 
         public static String OrderDetails;
         public static HashMap<String,String> OrderD;
-        public  static double TotalPrice;
+        public  static double subTotal;
 
     public String getCurrentOrderId() {
         return currentOrderId;
@@ -67,12 +67,12 @@ public class MyApplication extends Application {
         OrderD = orderD;
     }
 
-    public  double getTotalPrice() {
-        return TotalPrice;
+    public  double getSubTotal() {
+        return subTotal;
     }
 
-    public static void setTotalPrice(double totalPrice) {
-        TotalPrice = totalPrice;
+    public static void setSubTotal(double subTotal) {
+        subTotal = subTotal;
     }
 
     public String getOrderDetails() {
