@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void UserLoginButton(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
 }
 

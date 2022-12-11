@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 insertUserData();
-                Intent intent= new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent= new Intent(LoginActivity.this, RestaurantListActivity.class);
                 startActivity(intent);
             }
         });

@@ -6,51 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="401dp"
+        android:layout_height="324dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/userLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:onClick="UserLoginButton"
+            android:text="User Login" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/blue"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
 
-                <Button
-                    android:id="@+id/restaurantList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginEnd="100dp"
-                    android:layout_marginBottom="300dp"
-                    android:onClick="RestaurantListButton"
-                    android:text="@string/restaurantlist"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/resstaurantLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="RestaurantLoginButton"
+            android:text="Restaurant Login " />
 
-                <Button
-                    android:id="@+id/resstaurantLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="151dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="166dp"
-                    android:layout_marginBottom="82dp"
-                    android:onClick="RestaurantLoginButton"
-                    android:text="ResLogin"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/restaurantList" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

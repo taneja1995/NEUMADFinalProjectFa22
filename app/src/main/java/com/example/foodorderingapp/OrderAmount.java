@@ -3,6 +3,7 @@ package com.example.foodorderingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,9 @@ public class OrderAmount extends AppCompatActivity {
     DatabaseReference firebaseDbRef;
     Order order=new Order();
     com.example.foodorderingapp.MyApplication myApplication;
+    Double totalCost=0.0;
+    TextView itemSubtotal;
+    TextView orderTotal;
 
 
     private void addToFirebase(){
@@ -35,7 +39,8 @@ public class OrderAmount extends AppCompatActivity {
         order.setOrderedBy( ((MyApplication) this.getApplication()).getUserName());
         order.setHotelId(((MyApplication) this.getApplication()).getRestaurantName());
         order.setCompletionStatus("In Progress");
-        order.setTotalCost("$30");
+        totalCost= ((MyApplication) this.getApplication()).getSubTotal()+10+2;
+        order.setTotalCost(String.valueOf(totalCost));
         StringBuilder orderedItems=new StringBuilder();
         Map<String,String> map = ((MyApplication) this.getApplication()).OrderD;
         for(String key :map.keySet()){
@@ -56,6 +61,11 @@ public class OrderAmount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderamount);
+        itemSubtotal=findViewById(R.id.subtotalVal_tv);
+        orderTotal=findViewById(R.id.totalVal_tv);
+        Double subTot= ((MyApplication) this.getApplication()).getSubTotal();
+        itemSubtotal.setText(String.valueOf(subTot));
+        orderTotal.setText(String.valueOf(subTot+10+2));
     }
 
     public void confirmCheckoutBtn(View view){
