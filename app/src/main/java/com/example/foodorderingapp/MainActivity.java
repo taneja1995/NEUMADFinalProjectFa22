@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void BtnMaps(View view){
+        Intent intent = new Intent(this, LocationActivity.class);
+        startActivity(intent);
+    }
+
     public void checkoutBtn(View view){
         Intent intent = new Intent(this, OrderAmount.class);
         startActivity(intent);
@@ -40,3 +45,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+

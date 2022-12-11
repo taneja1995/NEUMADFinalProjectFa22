@@ -1,17 +1,26 @@
 package com.example.foodorderingapp;
 
+import java.util.Date;
 import java.util.List;
 
 public class Order {
-    public String getCompletionStatus() {
-        return completionStatus;
-    }
 
-    public void setCompletionStatus(String completionStatus) {
-        this.completionStatus = completionStatus;
-    }
-
+    private String orderNo;
     private String completionStatus;
+    private String hotelId;
+    private List<OrderedItem> orderedItems;
+    private String orderedOn;
+    private String orderedBy;
+
+    public String getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(String totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    private String totalCost;
 
     public String getHotelId() {
         return hotelId;
@@ -28,11 +37,15 @@ public class Order {
     public void setOrderedItems(List<OrderedItem> orderedItems) {
         this.orderedItems = orderedItems;
     }
+    public String getCompletionStatus() {
+        return completionStatus;
+    }
 
-    private String hotelId;
-    private List<OrderedItem> orderedItems;
-    private String orderNo;
-    private String orderedOn;
+    public void setCompletionStatus(String completionStatus) {
+        this.completionStatus = completionStatus;
+    }
+
+
 
     public String getOrderedBy() {
         return orderedBy;
@@ -42,7 +55,6 @@ public class Order {
         this.orderedBy = orderedBy;
     }
 
-    private String orderedBy;
 
     public String getOrderedOn() {
         return orderedOn;
@@ -59,4 +71,5 @@ public class Order {
     public void setOrderNo(String orderNo) {
         this.orderNo = orderNo;
     }
+
 }

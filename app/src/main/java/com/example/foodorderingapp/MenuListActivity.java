@@ -21,10 +21,10 @@ import java.util.List;
 
 public class MenuListActivity extends AppCompatActivity {
 
-    TextView noOfItem;
-    private List<OrderedItem> menuLists = new ArrayList<OrderedItem>();
+    TextView restaurantName;
+    private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
 
-    OrderedItem orderedItem;
+    FoodItems foodItem;
     int count=0;
     RecyclerView menuListRV;
     FirebaseDatabase firebaseDatabase;
@@ -36,18 +36,12 @@ public class MenuListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmenu);
-
-        noOfItem= (TextView) findViewById(R.id.noOfItem);
-        //this.menuLists.add(new OrderedItem("rice",""));
-       // this.menuList.add(new OrderedItem("roti",""));
-        //this.menuList.add(new OrderedItem("bread",""));
-
-
+        restaurantName=findViewById(R.id.restaurantName);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference().child("Restaurant");
         firebaseStorage = FirebaseStorage.getInstance();
         reference.keepSynced(true);
-        menuListAdapter = new MenuListAdapter( menuLists,this);
+        menuListAdapter = new MenuListAdapter( foodItemsList,this);
 
         addDataItem();
         DisplayRecyclerView();
@@ -63,21 +57,22 @@ public class MenuListActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                menuLists.clear();
+                foodItemsList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     //OrderedItem = new OrderedItem();
                     DataSnapshot menuList = snapshot.child("MenuList");
-                    String ResName=snapshot.getKey();
-                    System.out.println("----------------"+ResName);
-                    if(ResName.equals("Chipotle")){
+                    String resName=snapshot.getKey();
+                    System.out.println("----------------"+resName);
+                    restaurantName.setText("IndianSpices");
+                    if(resName.equals("IndianSpices")){
 
                     for(DataSnapshot menu:menuList.getChildren()) {
-                        OrderedItem orderedItem=new OrderedItem();
-                        orderedItem.setMenuImage(menu.child("Image").getValue().toString());
-                        orderedItem.setOrderedItemName(menu.getKey());
-                        orderedItem.setPrice(menu.child("Price").getValue().toString());
+                        FoodItems foodItems=new FoodItems();
+                        foodItems.setFoodImage(menu.child("Image").getValue().toString());
+                        foodItems.setFoodItemName(menu.getKey());
+                        foodItems.setFoodPrice(menu.child("Price").getValue().toString());
                         System.out.println("----------------" + menu.getKey() + "--" + menu.child("Price").getValue().toString());
-                        menuLists.add(orderedItem);
+                        foodItemsList.add(foodItems);
                         menuListAdapter.notifyDataSetChanged();
                     }
                     }
@@ -92,18 +87,4 @@ public class MenuListActivity extends AppCompatActivity {
 
         });
     }
-
-   /* public void increment(View v){
-        count++;
-        noOfItem.setText(""+count);
-        orderedItem.setOrderedItemQuantity(String.valueOf(count));
-
-    }
-
-    public void decrement(View v){
-        if(count<0){ count=0;}
-        else{ count--;}
-        noOfItem.setText(""+count);
-        orderedItem.setOrderedItemQuantity(String.valueOf(count));
-    }*/
 }
