@@ -10,14 +10,14 @@ public class MyApplication extends Application {
         public String RestaurantLatitude,RestaurantLongitude;
         public String RestaurantName;
         public static String OrderDetails;
-        public HashMap<String,Integer> OrderD;
+        public static HashMap<String,String> OrderD;
         public  static double TotalPrice;
 
-    public HashMap<String, Integer> getOrderD() {
+    public HashMap<String, String> getOrderD() {
         return OrderD;
     }
 
-    public void setOrderD(HashMap<String, Integer> orderD) {
+    public void setOrderD(HashMap<String, String> orderD) {
         OrderD = orderD;
     }
 
