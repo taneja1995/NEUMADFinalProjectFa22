@@ -3,8 +3,6 @@ package com.example.foodorderingapp;
 import android.app.Application;
 
 public class MyApplication extends Application {
-
-
         public String UserName;
         public String UserId;
         public String RestaurantLatitude,RestaurantLongitude;
@@ -33,10 +31,6 @@ public class MyApplication extends Application {
     public void setRestaurantLongitude(String restaurantLongitude) {
         RestaurantLongitude = restaurantLongitude;
     }
-
-    public String UserName;
-    public String UserId;
-
 
     public String getUserId() {
         return UserId;
