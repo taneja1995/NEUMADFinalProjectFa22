@@ -5,13 +5,22 @@ import android.app.Application;
 import java.util.HashMap;
 
 public class MyApplication extends Application {
-        public String UserName;
-        public String UserId;
-        public String RestaurantLatitude,RestaurantLongitude;
-        public String RestaurantName;
-        public static String OrderDetails;
-        public HashMap<String,Integer> OrderD;
-        public  static double TotalPrice;
+    public String UserName;
+    public String UserId;
+    public String RestaurantLatitude, RestaurantLongitude;
+    public String RestaurantName;
+    public static String OrderDetails;
+    public HashMap<String, Integer> OrderD;
+    public static double TotalPrice;
+    public String mostFrequentRestaurantName;
+
+    public void setmostFrequentRestaurantName(String name) {
+        mostFrequentRestaurantName = name;
+    }
+
+    public String setmostFrequentRestaurantName() {
+        return mostFrequentRestaurantName;
+    }
 
     public HashMap<String, Integer> getOrderD() {
         return OrderD;
@@ -21,7 +30,7 @@ public class MyApplication extends Application {
         OrderD = orderD;
     }
 
-    public  double getTotalPrice() {
+    public double getTotalPrice() {
         return TotalPrice;
     }
 

@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                             String[] temp = od.split(";");
                             orderedItem.setOrderedItemName(temp[0]);
                             orderedItem.setOrderedItemQuantity(temp[1]);
-                            orderedItemList.put(temp[0],orderedItemList.getOrDefault(temp[0],0)+1);
+                            orderedItemList.put(temp[0]+";"+hotelId,orderedItemList.getOrDefault(temp[0]+";"+hotelId,0)+1);
                         }
                     }
                 }
@@ -156,7 +156,8 @@ public class LoginActivity extends AppCompatActivity {
                             maxCount = entry.getValue();
                         }
                     }
-                    sendNotification(mostFrequentString);
+                    String[] temp = mostFrequentString.split(";");
+                    sendNotification(temp[0],temp[1]);
                 }
             }
 
@@ -167,11 +168,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void sendNotification(String item){
+    public void sendNotification(String item,String hotel){
 
         Intent intentPresent = new Intent(this, MenuListActivity.class);
-        intentPresent.putExtra("my_string_data", "Hello, this is my string data!");
-        PendingIntent pPresenetIntent = PendingIntent.getActivity(this, 0, intentPresent, PendingIntent.FLAG_IMMUTABLE);
+        intentPresent.putExtra("my_string_data", hotel);
+        PendingIntent pPresenetIntent = PendingIntent.getActivity(this, 0, intentPresent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         String channelId = getString(R.string.channel_id);
 
@@ -179,14 +180,14 @@ public class LoginActivity extends AppCompatActivity {
         Notification noti = new NotificationCompat.Builder(this,channelId)
 
                 .setContentTitle("Sticker")
-                .setContentText(" You usually order this "+ item +" at this time.")
+                .setContentText(" You usually order this "+ item +" at from "+hotel+" this time.")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .addAction(R.drawable.gender_checked_background, "And more", pPresenetIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         noti.flags |= Notification.FLAG_AUTO_CANCEL ;
         Random r = new Random();
-        notificationManager.notify(r.nextInt(100) + 1, noti);
+        notificationManager.notify(1, noti);
 
     }
 
@@ -207,8 +208,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 System.out.println("aaaaaaa");
                 getDataFirebase();
-                // Generate the notification here
-//                sendNotification();
                 // Post the Runnable again after 10 seconds
                 handler.postDelayed(this, 1000);
             }

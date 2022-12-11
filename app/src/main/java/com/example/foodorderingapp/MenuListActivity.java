@@ -26,18 +26,6 @@ import java.util.Set;
 
 public class MenuListActivity extends AppCompatActivity {
 
-    @Override
-    protected void onNewIntent (Intent intent) {
-        super.onNewIntent(intent) ;
-        Bundle extras = intent.getExtras() ;
-        if (extras != null ) {
-            if (extras.containsKey( "my_string_data" )) {
-                String msg = extras.getString( "my_string_data" ) ;
-                System.out.println(msg);
-            }
-        }
-    }
-
     TextView restaurantName;
     Button confirmOrder;
     private List<FoodItems> foodItemsList = new ArrayList<FoodItems>();
@@ -52,12 +40,14 @@ public class MenuListActivity extends AppCompatActivity {
     public static String latitude = null;
     public   static String longitude=null;
     public static String restaurant=null;
+    public String temp="";
     MyApplication myApplication=new MyApplication();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmenu);
+        temp=getIntent().getStringExtra("my_string_data");
         restaurantName=findViewById(R.id.restaurantName);
         confirmOrder=findViewById(R.id.confirmOrder);
         firebaseDatabase = FirebaseDatabase.getInstance();
