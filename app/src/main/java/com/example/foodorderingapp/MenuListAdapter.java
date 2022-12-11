@@ -24,7 +24,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
     int count=0;
     String orderDetails;
    // MyApplication myApplication=new MyApplication();
-    Double totalPrice=0.0;
+    Double subTotal=0.0;
     HashMap<String, String> orderDe=new HashMap<>();
 
     public MenuListAdapter(List<FoodItems> foodItems, Context context) {
@@ -77,11 +77,11 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
                 }
 
                 orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
-                totalPrice= totalPrice+Double.parseDouble(orderedItem.getFoodPrice());
+                subTotal= subTotal+(Double.parseDouble(orderedItem.getFoodPrice()) * Double.parseDouble(orderedItem.getFoodItemQuantity()));
 
                 MyApplication.OrderD=orderDe;
                 MyApplication.OrderDetails=orderDetails;
-                MyApplication.TotalPrice=totalPrice;
+                MyApplication.subTotal=subTotal;
 
 
             }
@@ -119,9 +119,9 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
 
                 }
                 orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
-                totalPrice= totalPrice-Double.parseDouble(orderedItem.getFoodPrice());
+                subTotal= subTotal-(Double.parseDouble(orderedItem.getFoodPrice()) * Double.parseDouble(orderedItem.getFoodItemQuantity()));
                 MyApplication.OrderD=orderDe;
-                MyApplication.TotalPrice=totalPrice;
+                MyApplication.subTotal=subTotal;
                 //myApplication.setOrderDetails(orderDetails);
                 //myApplication.setTotalPrice(totalPrice);
             }
