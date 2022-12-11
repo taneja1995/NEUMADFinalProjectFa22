@@ -29,7 +29,7 @@ public class OrderAmount extends AppCompatActivity {
     com.example.foodorderingapp.MyApplication myApplication;
     Double totalCost=0.0;
     TextView itemSubtotal;
-    TextView orderTotal;
+    TextView orderTotal, deliveryFee, tax;
 
 
     private void addToFirebase(){
@@ -65,11 +65,22 @@ public class OrderAmount extends AppCompatActivity {
         setContentView(R.layout.activity_orderamount);
         itemSubtotal=findViewById(R.id.subtotalVal_tv);
         orderTotal=findViewById(R.id.totalVal_tv);
+        deliveryFee=findViewById(R.id.delFeeVal_tv);
+        tax=findViewById(R.id.taxVal_tv);
         Double subTot= ((MyApplication) this.getApplication()).getSubTotal();
         decimalFormat.format(subTot);
         System.out.println(" the subtotal is "+ subTot);
-        itemSubtotal.setText(String.valueOf(subTot));
-        orderTotal.setText(String.valueOf(decimalFormat.format(subTot+10.00+2.00)));
+
+        if(subTot==0.0){
+            itemSubtotal.setText(String.valueOf(subTot));
+            deliveryFee.setText(String.valueOf(0));
+            tax.setText(String.valueOf(0));
+            orderTotal.setText(String.valueOf(0));
+        }
+        else{
+            itemSubtotal.setText(String.valueOf(subTot));
+            orderTotal.setText(String.valueOf(decimalFormat.format(subTot+10.00+2.00)));
+        }
     }
 
     public void confirmCheckoutBtn(View view){
