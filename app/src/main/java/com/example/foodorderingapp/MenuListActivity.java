@@ -40,12 +40,17 @@ public class MenuListActivity extends AppCompatActivity {
     public static String latitude = null;
     public   static String longitude=null;
     public static String restaurant=null;
+    public String temp="";
     MyApplication myApplication=new MyApplication();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foodmenu);
+        temp=getIntent().getStringExtra("my_string_data");
+        if (temp!=null){
+            MyApplication.RestaurantName = temp;
+        }
         restaurantName=findViewById(R.id.restaurantName);
         confirmOrder=findViewById(R.id.confirmOrder);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -75,7 +80,6 @@ public class MenuListActivity extends AppCompatActivity {
         System.out.println("Total Price:........"+myApplication.getTotalPrice());
         System.out.println("Hashmap:........"+myApplication.getOrderD().size());
 
-
         Intent intent= new Intent(MenuListActivity.this, MapsActivity.class);
         startActivity(intent);
     }
@@ -103,9 +107,9 @@ public class MenuListActivity extends AppCompatActivity {
                     DataSnapshot menuList = snapshot.child("MenuList");
                     String resName=snapshot.getKey();
                     System.out.println("----------------"+resName);
-                    restaurantName.setText("Chipotle");
+                    restaurantName.setText(MyApplication.RestaurantName);
 
-                    if(resName.equals("Chipotle")){
+                    if(resName.equals(MyApplication.RestaurantName)){
                     for(DataSnapshot menu:menuList.getChildren()) {
                         FoodItems foodItems=new FoodItems();
                         foodItems.setFoodImage(menu.child("Image").getValue().toString());

@@ -13,6 +13,16 @@ public class MyApplication extends Application {
         public static HashMap<String,String> OrderD;
         public  static double TotalPrice;
 
+    public String mostFrequentRestaurantName;
+
+    public void setmostFrequentRestaurantName(String name) {
+        mostFrequentRestaurantName = name;
+    }
+
+    public String setmostFrequentRestaurantName() {
+        return mostFrequentRestaurantName;
+    }
+
     public HashMap<String, String> getOrderD() {
         return OrderD;
     }

@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,30 +18,49 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class OrderedItemsActivity extends AppCompatActivity {
 
     private List<OrderedItem> orderedItemList = new ArrayList<OrderedItem>();
+    private String orderId="";
 
     RecyclerView orderedItemsRecyclerView;
+    Order order = null;
 
     FirebaseDatabase firebaseDatabase;
     private DatabaseReference reference;
     OrderedItemAdapter orderedItemAdapter;
+    Button completePreparingOrder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordered_items);
+        orderId =getIntent().getStringExtra("orderNumber");
         firebaseDatabase = FirebaseDatabase.getInstance();
-        reference = firebaseDatabase.getReference().child("Order");
+        reference = firebaseDatabase.getReference().child("Order").child(orderId);
         reference.keepSynced(true);
+        completePreparingOrder = findViewById(R.id.orderCompletedByRestaurant);
+        completePreparingOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("are you reaching");
+                order.setCompletionStatus("Completed");
+                HashMap orderUpdate = new HashMap();
+                orderUpdate.put("completionStatus","Completed");
+                reference.updateChildren(orderUpdate).addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        System.out.println("Order updated successfully");
+                    }
+                });
+            }
+        });
 
         orderedItemAdapter = new OrderedItemAdapter(orderedItemList, this);
-        this.orderedItemList.add(new OrderedItem("rice","2"));
-        this.orderedItemList.add(new OrderedItem("roti","5"));
-        this.orderedItemList.add(new OrderedItem("bread","7"));
 
         orderedItemsRecyclerView = findViewById(R.id.orderedItemsRecyclerView);
 
@@ -51,30 +74,19 @@ public class OrderedItemsActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Order order = null;
                 orderedItemList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    order = new Order();
-                    //String user=String.valueOf(dataSnapshot.child(userName).getValue());
-                    String hotelId = String.valueOf(snapshot.child("hotelId").getValue());
-                    String completionStatus
-                            = String.valueOf(snapshot.child("completionStatus").getValue());
-                    DataSnapshot orderDetails = snapshot.child("orderDetails");
 
-                    if (hotelId.equals("1")) {
-                        order.setHotelId(hotelId);
-                        order.setCompletionStatus(completionStatus);
-                        for(DataSnapshot od:orderDetails.getChildren()){
-                            OrderedItem orderedItem=new OrderedItem();
-                            orderedItem.setOrderedItemName(String.valueOf(od.getKey()));
-                            orderedItem.setOrderedItemQuantity(String.valueOf(od.getValue()));
-                            orderedItemList.add(orderedItem);
-                        }
-                        orderedItemAdapter.notifyDataSetChanged();
-                    }
+                order = new Order();
+                String orderDetails = String.valueOf(dataSnapshot.child("orderedItems").getValue());
 
+                for(String od:orderDetails.split("/")){
+                    OrderedItem orderedItem=new OrderedItem();
+                    String[] temp = od.split(";");
+                    orderedItem.setOrderedItemName(temp[0]);
+                    orderedItem.setOrderedItemQuantity(temp[1]);
+                    orderedItemList.add(orderedItem);
                 }
-
+                orderedItemAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -83,4 +95,5 @@ public class OrderedItemsActivity extends AppCompatActivity {
             }
         });
     }
+
 }
