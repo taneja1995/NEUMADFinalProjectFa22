@@ -4,7 +4,16 @@ public class Message {
 
     private String message;
     private String sentOn;
-    private String username;
+    private String sender;
+    private String receiver;
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
 
     public String getMessage() {
         return message;
@@ -22,11 +31,11 @@ public class Message {
         this.sentOn = sentOn;
     }
 
-    public String getUsername() {
-        return username;
+    public String getSender() {
+        return sender;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setSender(String username) {
+        this.sender = sender;
     }
 }
