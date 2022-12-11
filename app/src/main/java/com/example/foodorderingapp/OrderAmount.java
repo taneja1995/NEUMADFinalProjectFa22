@@ -24,7 +24,7 @@ public class OrderAmount extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     DatabaseReference firebaseDbRef;
     Order order=new Order();
-    MyApplication application= new MyApplication();
+    com.example.foodorderingapp.MyApplication myApplication;
     Double totalCost=0.0;
     TextView itemSubtotal;
     TextView orderTotal;
@@ -35,22 +35,26 @@ public class OrderAmount extends AppCompatActivity {
         Date currentTime = Calendar.getInstance().getTime();
         String id = firebaseDbRef.push().getKey();
         order.setOrderedOn(currentTime.toString());
-        order.setOrderedBy(application.getUserName());
-        order.setHotelId(application.getRestaurantName());
+
+        order.setOrderedBy( ((MyApplication) this.getApplication()).getUserName());
+        order.setHotelId(((MyApplication) this.getApplication()).getRestaurantName());
         order.setCompletionStatus("In Progress");
         totalCost= ((MyApplication) this.getApplication()).getSubTotal()+10+2;
         order.setTotalCost(String.valueOf(totalCost));
         StringBuilder orderedItems=new StringBuilder();
-        Map<String,String> map = MyApplication.OrderD;
+        Map<String,String> map = ((MyApplication) this.getApplication()).OrderD;
         for(String key :map.keySet()){
             orderedItems.append(key);
             orderedItems.append(";");
             orderedItems.append(map.get(key));
             orderedItems.append("/");
         }
+
         orderedItems.deleteCharAt(orderedItems.length()-1);
         order.setOrderedItems(orderedItems.toString());
         firebaseDbRef.child(id).setValue(order);
+        System.out.println("order NG"+order.getOrderedBy());
+        System.out.println("order NG"+order.getOrderNo());
     }
 
     @Override
