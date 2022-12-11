@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, RestorderReceiverActivity.class);
         startActivity(intent);
     }
+    public void RestaurantLoginButton(View view){
+        Intent intent = new Intent(this, RestaurantLoginActivity.class);
+        startActivity(intent);
+    }
+
 
 }
 

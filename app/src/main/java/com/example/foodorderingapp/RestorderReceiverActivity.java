@@ -28,6 +28,8 @@ public class RestorderReceiverActivity extends AppCompatActivity {
     private DatabaseReference reference;
     FirebaseStorage firebaseStorage;
     RestorderReceiverAdapter restorderReceiverAdapter;
+    com.example.foodorderingapp.MyApplication myApplication;
+    String restaurantName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class RestorderReceiverActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         reference.keepSynced(true);
         restorderReceiverAdapter = new RestorderReceiverAdapter( restaurantOrdersList,this);
+        restaurantName =   ((MyApplication) this.getApplication()).getRestaurantName();
+
+        System.out.println(restaurantName);
 
         addDataItem();
         DisplayRecyclerView();
@@ -60,19 +65,20 @@ public class RestorderReceiverActivity extends AppCompatActivity {
                 restaurantOrdersList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String orderNo =snapshot.getKey();
-
                     if(snapshot.child("hotelId").getValue() == null)
                         continue;
 
                     String hotelId = Objects.requireNonNull(snapshot.child("hotelId").getValue()).toString();
+                    String completionStatus = Objects.requireNonNull(snapshot.child("completionStatus").getValue()).toString();
 
-
-                    if(hotelId.equals("Curry & Spice")){
+                    if(hotelId.equals(restaurantName) && completionStatus.equals("In Progress")){
 
                         order = new Order();
                         order.setOrderNo(orderNo);
                         order.setOrderedOn(Objects.requireNonNull(snapshot.child("orderedOn").getValue()).toString());
                         order.setOrderedBy(Objects.requireNonNull(snapshot.child("orderedBy").getValue()).toString());
+                        order.setCompletionStatus(Objects.requireNonNull(snapshot.child("completionStatus").getValue()).toString());
+
 
                         restaurantOrdersList.add(order);
                         restorderReceiverAdapter.notifyDataSetChanged();
