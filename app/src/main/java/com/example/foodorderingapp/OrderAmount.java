@@ -22,6 +22,7 @@ public class OrderAmount extends AppCompatActivity {
     FirebaseStorage firebaseStorage;
     DatabaseReference firebaseDbRef;
     Order order=new Order();
+    MyApplication application= new MyApplication();
 
 
     private void addToFirebase(){
@@ -29,13 +30,10 @@ public class OrderAmount extends AppCompatActivity {
         Date currentTime = Calendar.getInstance().getTime();
         String id = firebaseDbRef.push().getKey();
         order.setOrderedOn(currentTime.toString());
-        order.setOrderedBy("ananth");
-        // get the hotel Id from the restaurant selected in rest page.
-        order.setHotelId("Curry & Spice");
+        order.setOrderedBy(application.getUserName());
+        order.setHotelId(application.getRestaurantName());
         order.setCompletionStatus("In Progress");
-        // calculate the total cost from the order amount activity.
         order.setTotalCost("$30");
-        // get ordered items from menu list selected.
         firebaseDbRef.child(id).setValue(order);
     }
 

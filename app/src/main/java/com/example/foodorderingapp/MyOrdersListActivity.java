@@ -53,7 +53,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
                 orderList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     order= new Order();
-                    String orderName=snapshot.getKey();
+                    //String orderName=snapshot.getKey();
                     String resName= String.valueOf(snapshot.child("hotelId").getValue());
                     String cost= String.valueOf(snapshot.child("orderedItems").child("price").getValue());
                     String timestamp= String.valueOf(snapshot.child("orderedOn").getValue());
@@ -62,6 +62,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     order.setTotalCost(cost);
                     order.setHotelId(resName);
                     order.setOrderedOn(timestamp);
+                    order.setOrderNo(snapshot.getKey());
                     order.setOrderedBy(orderedBy);
                     order.setCompletionStatus(status);
                     orderList.add(order);

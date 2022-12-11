@@ -38,7 +38,7 @@ public class MyOrdersListAdapter extends RecyclerView.Adapter<MyOrdersListAdapte
     @Override
     public void onBindViewHolder(@NonNull MyOrdersListHolder holder, int position) {
         firebaseDbRef = FirebaseDatabase.getInstance().getReference().child("Order");
-        String orderId = firebaseDbRef.push().getKey();
+        String orderId = ordersList.get(position).getOrderNo();
         Order order= ordersList.get(position);
         holder.hotelName.setText(ordersList.get(position).getHotelId());
         holder.orderTime.setText(ordersList.get(position).getOrderedOn());
