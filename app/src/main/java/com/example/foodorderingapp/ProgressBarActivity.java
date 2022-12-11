@@ -49,7 +49,6 @@ public class ProgressBarActivity extends AppCompatActivity {
         reference2=FirebaseDatabase.getInstance().getReference().child("Order");
         firebaseStorage = FirebaseStorage.getInstance();
 
-
         mapsReference = FirebaseDatabase.getInstance().getReference().child("Restaurant");
         firebaseStorage = FirebaseStorage.getInstance();
         mapsReference.keepSynced(true);
@@ -57,6 +56,12 @@ public class ProgressBarActivity extends AppCompatActivity {
         Bundle extras= getIntent().getExtras();
         if(extras!=null){
             orderStatus = extras.getString("orderStatus");
+        }
+
+        if(orderStatus.equals("Completed")){
+            status.setText("Your order is complete");
+        }else{
+            status.setText("Your order is in progress");
         }
 
         //setProgress();
@@ -67,13 +72,13 @@ public class ProgressBarActivity extends AppCompatActivity {
                 if(orderStatus.equals("Completed")){
                     progress=100;
                     progressBar.setProgress(progress);
-                    status.setText("Yipeee!! Your order is prepared! Delicious food is on the way!");
-                    status.setTextColor(Color.BLACK);
+                    //status.setText("Yipeee!! Your order is prepared! Delicious food is on the way!");
+
                 }else{
                     progress=50;
                     progressBar.setProgress(progress);
-                    status.setText("Your order is still in progress! Thanks for your patience!");
-                    status.setTextColor(Color.BLACK);
+                    //status.setText("Your order is still in progress! Thanks for your patience!");
+
                 }
             }
         });
