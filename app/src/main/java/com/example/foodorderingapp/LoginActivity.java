@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-     private void insertUserData() {
+    private void insertUserData() {
         String user=userName.getText().toString();
         UserData userData=new UserData(user);
         userData.setUserName(user);
