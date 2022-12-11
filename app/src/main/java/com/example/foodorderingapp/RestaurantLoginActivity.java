@@ -38,6 +38,6 @@ public class RestaurantLoginActivity extends AppCompatActivity {
 
     private void insertRestaurantData() {
         String restaurantName= restaurantUserName.getText().toString();
-        ((MyApplication) this.getApplication()).setRestaurantName(restaurantName);
+        ((MyApplication) this.getApplication()).setCurrentLoggedInRestaurantName(restaurantName);
     }
 }
