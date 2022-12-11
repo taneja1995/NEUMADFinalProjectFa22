@@ -25,13 +25,12 @@ public class RestaurantLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurantlogin);
         this.restaurantUserName=findViewById(R.id.restaurantUserName);
         loginBtn=findViewById(R.id.signIn);
-        userRef= FirebaseDatabase.getInstance().getReference().child("Customer").child("customerId");
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertRestaurantData();
-                Intent intent= new Intent(RestaurantLoginActivity.this, MainActivity.class);
+                Intent intent= new Intent(RestaurantLoginActivity.this, RestorderReceiverActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,6 +38,6 @@ public class RestaurantLoginActivity extends AppCompatActivity {
 
     private void insertRestaurantData() {
         String restaurantName= restaurantUserName.getText().toString();
-        //((MyApplication) this.getApplication()).setRestaurantName(restaurantName);
+        ((MyApplication) this.getApplication()).setRestaurantName(restaurantName);
     }
 }
