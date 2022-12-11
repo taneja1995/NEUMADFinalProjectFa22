@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Order {
 
+    private String orderNo;
     private String completionStatus;
     private String hotelId;
     private List<OrderedItem> orderedItems;
@@ -21,12 +22,6 @@ public class Order {
 
     private String totalCost;
 
-    public String getOrderedBy() {
-        return orderedBy;
-    }
-    public void setOrderedBy(String orderedBy) {
-        this.orderedBy = orderedBy;
-    }
     public String getHotelId() {
         return hotelId;
     }
@@ -49,11 +44,32 @@ public class Order {
     public void setCompletionStatus(String completionStatus) {
         this.completionStatus = completionStatus;
     }
+
+
+
+    public String getOrderedBy() {
+        return orderedBy;
+    }
+
+    public void setOrderedBy(String orderedBy) {
+        this.orderedBy = orderedBy;
+    }
+
+
     public String getOrderedOn() {
         return orderedOn;
     }
+
     public void setOrderedOn(String orderedOn) {
         this.orderedOn = orderedOn;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
 }

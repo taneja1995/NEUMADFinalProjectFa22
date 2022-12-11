@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BtnMaps(View view){
-        Intent intent = new Intent(this, LocationActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 
@@ -34,4 +34,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void RestaurantListButton(View view){
+        Intent intent = new Intent(this, RestaurantListActivity.class);
+        startActivity(intent);
+    }
+
+    public void RestaurantOrdersButton(View view){
+        Intent intent = new Intent(this, RestorderReceiverActivity.class);
+        startActivity(intent);
+    }
+
 }
+

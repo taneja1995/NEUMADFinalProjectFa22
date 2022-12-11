@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appColor">#14274e</color>
+    <color name="colorPrimaryDark">#770F0F0E</color>
+    <color name="colorPrimary">#131111</color>
 </resources>
