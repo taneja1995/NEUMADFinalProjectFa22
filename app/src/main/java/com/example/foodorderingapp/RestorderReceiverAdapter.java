@@ -2,6 +2,7 @@ package com.example.foodorderingapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,23 @@ public class RestorderReceiverAdapter extends RecyclerView.Adapter<RestorderRece
 
     @Override
     public void onBindViewHolder(@NonNull RestorderReceiverAdapter.RestOrderReceiverHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.order_no.setText(restaurantOrdersList.get(position).getOrderNo());
+        String orderNumber = restaurantOrdersList.get(position).getOrderNo();
+        holder.order_no.setText(orderNumber);
        holder.ordered_by_name.setText(restaurantOrdersList.get(position).getOrderedBy());
        holder.date_of_order.setText(restaurantOrdersList.get(position).getOrderedOn());
+        holder.itemView.findViewById(R.id.routeIt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), OrderedItemsActivity.class);
+                intent.putExtra("orderNumber",orderNumber);
+                //System.out.println("the status in holder is "+ order);
+                System.out.println("------oops----------"+orderNumber);
+
+                context.startActivity(intent);
+
+            }
+        });
+
     }
 
 
