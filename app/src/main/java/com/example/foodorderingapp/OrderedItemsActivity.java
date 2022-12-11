@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -59,6 +61,9 @@ public class OrderedItemsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         System.out.println("Order updated successfully");
+                        Toast.makeText(OrderedItemsActivity.this, "Order Completed!", Toast.LENGTH_SHORT).show();
+                        Intent intent= new Intent(OrderedItemsActivity.this, RestorderReceiverActivity.class);
+                        startActivity(intent);
                     }
                 });
             }
