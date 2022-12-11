@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
 public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuListHolder>{
     private final List<FoodItems> foodItems;
     private final Context context;
+    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
     int count=0;
     String orderDetails;
    // MyApplication myApplication=new MyApplication();
@@ -78,7 +80,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
 
                 orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
                 subTotal= subTotal+(Double.parseDouble(orderedItem.getFoodPrice()) * Double.parseDouble(orderedItem.getFoodItemQuantity()));
-
+                decimalFormat.format(subTotal);
                 MyApplication.OrderD=orderDe;
                 MyApplication.OrderDetails=orderDetails;
                 MyApplication.subTotal=subTotal;
@@ -120,6 +122,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuLi
                 }
                 orderDe.put(orderedItem.getFoodItemName(),orderedItem.getFoodItemQuantity()+";"+orderedItem.getFoodPrice());
                 subTotal= subTotal-(Double.parseDouble(orderedItem.getFoodPrice()) * Double.parseDouble(orderedItem.getFoodItemQuantity()));
+                decimalFormat.format(subTotal);
                 MyApplication.OrderD=orderDe;
                 MyApplication.subTotal=subTotal;
                 //myApplication.setOrderDetails(orderDetails);
