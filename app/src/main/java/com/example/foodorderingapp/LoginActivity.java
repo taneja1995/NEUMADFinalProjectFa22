@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void getDataFirebase(){
-        String username="ananth";
+        String username="raj";
         FirebaseDatabase firebaseDatabase;
         DatabaseReference reference;
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -106,13 +106,29 @@ public class LoginActivity extends AppCompatActivity {
                     String completionStatus
                             = String.valueOf(snapshot.child("completionStatus").getValue());
                     String time = String.valueOf(snapshot.child("orderedOn").getValue());
-                    DataSnapshot orderDetails = snapshot.child("orderedItems");
+                    String orderDetails = String.valueOf(snapshot.child("orderedItems").getValue());
 
                     if (user.equals(username) && checkTime(time)) {
-                        sendNotification();
+                        for(String od:orderDetails.split("/")){
+                            OrderedItem orderedItem=new OrderedItem();
+                            String[] temp = od.split(";");
+                            orderedItem.setOrderedItemName(temp[0]);
+                            orderedItem.setOrderedItemQuantity(temp[1]);
+                            orderedItemList.put(temp[0],orderedItemList.getOrDefault(temp[0],0)+1);
+                        }
                     }
                 }
-
+                if (orderedItemList.size()>0){
+                    String mostFrequentString = null;
+                    int maxCount = 0;
+                    for (Map.Entry<String, Integer> entry : orderedItemList.entrySet()) {
+                        if (entry.getValue() > maxCount) {
+                            mostFrequentString = entry.getKey();
+                            maxCount = entry.getValue();
+                        }
+                    }
+                    sendNotification(mostFrequentString);
+                }
             }
 
             @Override
@@ -122,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void sendNotification(){
+    public void sendNotification(String item){
 
         Intent intentPresent = new Intent(this, MenuListActivity.class);
         intentPresent.putExtra("my_string_data", "Hello, this is my string data!");
@@ -134,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
         Notification noti = new NotificationCompat.Builder(this,channelId)
 
                 .setContentTitle("Sticker")
-                .setContentText(" sent a sticker.")
+                .setContentText(" You usually order this "+ item +" at this time.")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .addAction(R.drawable.gender_checked_background, "And more", pPresenetIntent).build();
 
