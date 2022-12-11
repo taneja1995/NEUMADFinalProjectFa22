@@ -76,21 +76,16 @@ public class OrderedItemsActivity extends AppCompatActivity {
                 orderedItemList.clear();
 
                 order = new Order();
-                //String user=String.valueOf(dataSnapshot.child(userName).getValue());
-                String hotelId = String.valueOf(dataSnapshot.child("hotelId").getValue());
-                String completionStatus
-                        = String.valueOf(dataSnapshot.child("completionStatus").getValue());
-                //DataSnapshot orderDetails = dataSnapshot.child("orderDetails");
+                String orderDetails = String.valueOf(dataSnapshot.child("orderedItems").getValue());
 
-                order.setHotelId(hotelId);
-                order.setCompletionStatus(completionStatus);
-//                for(DataSnapshot od:orderDetails.getChildren()){
-//                    OrderedItem orderedItem=new OrderedItem();
-//                    orderedItem.setOrderedItemName(String.valueOf(od.getKey()));
-//                    orderedItem.setOrderedItemQuantity(String.valueOf(od.getValue()));
-//                    orderedItemList.add(orderedItem);
-//                }
-//                orderedItemAdapter.notifyDataSetChanged();
+                for(String od:orderDetails.split("/")){
+                    OrderedItem orderedItem=new OrderedItem();
+                    String[] temp = od.split(";");
+                    orderedItem.setOrderedItemName(temp[0]);
+                    orderedItem.setOrderedItemQuantity(temp[1]);
+                    orderedItemList.add(orderedItem);
+                }
+                orderedItemAdapter.notifyDataSetChanged();
             }
 
             @Override
