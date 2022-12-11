@@ -55,12 +55,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/time_of_order"
+        android:id="@+id/order_status"
         style="@style/TextAppearance.AppCompat.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
-        android:text="11:32:12"
+        android:text="order status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_of_order" />
 
@@ -70,7 +70,7 @@
         android:layout_height="1dp"
         android:layout_marginRight="15dp"
         android:background="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toStartOf="@id/time_of_order"
+        app:layout_constraintEnd_toStartOf="@id/order_status"
         app:layout_constraintStart_toEndOf="@id/cust_img_cv"
         app:layout_constraintTop_toBottomOf="@id/ordered_by_name" />
 
@@ -95,6 +95,6 @@
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/order_no"
-        app:layout_constraintTop_toBottomOf="@+id/time_of_order" />
+        app:layout_constraintTop_toBottomOf="@+id/order_status" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,8 +39,11 @@ public class RestorderReceiverAdapter extends RecyclerView.Adapter<RestorderRece
     public void onBindViewHolder(@NonNull RestorderReceiverAdapter.RestOrderReceiverHolder holder, @SuppressLint("RecyclerView") int position) {
         String orderNumber = restaurantOrdersList.get(position).getOrderNo();
         holder.order_no.setText(orderNumber);
-       holder.ordered_by_name.setText(restaurantOrdersList.get(position).getOrderedBy());
-       holder.date_of_order.setText(restaurantOrdersList.get(position).getOrderedOn());
+        holder.ordered_by_name.setText(restaurantOrdersList.get(position).getOrderedBy());
+        holder.date_of_order.setText(restaurantOrdersList.get(position).getOrderedOn());
+        holder.order_status.setText(restaurantOrdersList.get(position).getCompletionStatus());
+
+
         holder.itemView.findViewById(R.id.routeIt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,14 +68,14 @@ public class RestorderReceiverAdapter extends RecyclerView.Adapter<RestorderRece
 
     public class RestOrderReceiverHolder extends RecyclerView.ViewHolder {
 
-        TextView time_of_order;
+        TextView order_status;
         TextView date_of_order;
         TextView order_no;
         TextView ordered_by_name;
 
         public RestOrderReceiverHolder(@NonNull View itemView) {
             super(itemView);
-            this.time_of_order = itemView.findViewById(R.id.time_of_order);
+            this.order_status = itemView.findViewById(R.id.order_status);
             this.date_of_order = itemView.findViewById(R.id.date_of_order);
             this.order_no = itemView.findViewById(R.id.order_no);
             this.ordered_by_name = itemView.findViewById(R.id.ordered_by_name);
