@@ -75,9 +75,26 @@ public class RestorderReceiverActivity extends AppCompatActivity {
 
                         order = new Order();
                         order.setOrderNo(orderNo);
-                        order.setOrderedOn(Objects.requireNonNull(snapshot.child("orderedOn").getValue()).toString());
-                        order.setOrderedBy(Objects.requireNonNull(snapshot.child("orderedBy").getValue()).toString());
-                        order.setCompletionStatus(Objects.requireNonNull(snapshot.child("completionStatus").getValue()).toString());
+                        String tempOrderedon = "no data";
+                        String tempOrderedBy = "no data";
+                        String tempCompletionStatus = "no data";
+
+                        if(snapshot.child("orderedOn").getValue() != null){
+                            tempOrderedon = snapshot.child("orderedOn").getValue().toString();
+                        }
+
+                        if(snapshot.child("orderedBy").getValue() != null){
+                            tempOrderedBy = snapshot.child("orderedBy").getValue().toString();
+                        }
+
+                        if(snapshot.child("completionStatus").getValue() != null){
+                            tempCompletionStatus = snapshot.child("completionStatus").getValue().toString();
+                        }
+
+
+                        order.setOrderedOn(tempOrderedon);
+                        order.setOrderedBy(tempOrderedBy);
+                        order.setCompletionStatus(tempCompletionStatus);
 
 
                         restaurantOrdersList.add(order);
