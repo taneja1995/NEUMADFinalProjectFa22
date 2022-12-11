@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -66,16 +68,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean checkTime(String time){
-        Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat format = new SimpleDateFormat("EEE MM dd HH:mm:ss z yyyy");
-        Date ordered = null;
-        try {
-            ordered = format.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long diff = currentTime.getTime() - ordered.getTime();
-        long diffSeconds = diff / 1000 % 60;
+        String[] timeF = time.split(" ");
+        LocalTime currentTime = LocalTime.now();
+
+        LocalTime givenTime = LocalTime.parse(timeF[3]);
+
+        long difference = Math.abs(ChronoUnit.MILLIS.between(currentTime, givenTime));
+
+        long diffSeconds = difference / 1000 ;
         if(diffSeconds>100){
             System.out.println("aaaaa");
             return true;
@@ -109,20 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     DataSnapshot orderDetails = snapshot.child("orderedItems");
 
                     if (user.equals(username) && checkTime(time)) {
-                        order.setHotelId(hotelId);
-                        order.setCompletionStatus(completionStatus);
-                        for(DataSnapshot od:orderDetails.getChildren()){
-                            orderedItemList.put(String.valueOf(od.getKey()),orderedItemList.getOrDefault(String.valueOf(od.getKey()),0)+1);
-                        }
-                        Map.Entry<String, Integer> maxEntry = null;
-                        for (Map.Entry<String, Integer> entry : orderedItemList.entrySet())
-                        {
-                            if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
-                            {
-                                maxEntry = entry;
-                            }
-                        }
-                        System.out.println(maxEntry.getKey());
+                        sendNotification();
                     }
                 }
 
