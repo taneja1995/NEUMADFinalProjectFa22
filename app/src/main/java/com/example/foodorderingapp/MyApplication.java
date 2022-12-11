@@ -4,8 +4,8 @@ import android.app.Application;
 
 public class MyApplication extends Application {
 
-        public String UserName;
-        public String UserId;
+    public String UserName;
+    public String UserId;
 
     public String getUserId() {
         return UserId;
@@ -16,12 +16,11 @@ public class MyApplication extends Application {
     }
 
     public String getUserName() {
-            return UserName;
-        }
+        return UserName;
+    }
 
-        public void setUserName(String userName) {
-            UserName = userName;
-        }
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
 
 }
-

@@ -53,10 +53,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+
+        <activity android:name=".RestaurantListActivity"/>
+        <activity android:name=".RestorderReceiverActivity"/>
+        <activity android:name=".ReceiveNotificationActivity"/>
         <activity android:name=".MyOrdersListActivity"/>
         <activity android:name=".OrderAmount"/>
         <activity android:name=".ChatActivity"/>
         <activity android:name=".ProgressBarActivity"/>
+
     </application>
 
 </manifest>
