@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intentPresent = new Intent(this, MenuListActivity.class);
         intentPresent.putExtra("my_string_data", hotel);
-        PendingIntent pPresenetIntent = PendingIntent.getActivity(this, 0, intentPresent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pPresenetIntent = PendingIntent.getActivity(this, 0, intentPresent, PendingIntent.FLAG_IMMUTABLE);
 
         String channelId = getString(R.string.channel_id);
 

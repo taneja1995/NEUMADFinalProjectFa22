@@ -71,13 +71,14 @@ public class RestorderReceiverActivity extends AppCompatActivity {
                     String hotelId = (snapshot.child("hotelId").getValue()).toString();
                     String completionStatus = (snapshot.child("completionStatus").getValue()).toString();
 
-                    if(hotelId.equals(restaurantName) && completionStatus.equals("In Progress")){
+                    if(hotelId.equals(restaurantName)){
 
                         order = new Order();
                         order.setOrderNo(orderNo);
                         String tempOrderedon = "no data";
                         String tempOrderedBy = "no data";
                         String tempCompletionStatus = "no data";
+
 
                         if(snapshot.child("orderedOn").getValue() != null){
                             tempOrderedon = snapshot.child("orderedOn").getValue().toString();
