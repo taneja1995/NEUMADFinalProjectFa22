@@ -32,6 +32,7 @@
                     android:textAlignment="center"
                     app:layout_constraintBottom_toTopOf="@+id/password"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.534"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -49,6 +50,7 @@
                     android:textAlignment="center"
                     app:layout_constraintBottom_toTopOf="@+id/signIn"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.534"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/restaurantUserName" />
 
@@ -56,13 +58,15 @@
                     android:id="@+id/signIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="148dp"
+                    android:layout_marginStart="320dp"
+                    android:layout_marginEnd="323dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#14274E"
                     android:onClick="showRestaurantList"
                     android:text="Log In"
                     app:iconTint="#14274E"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/password" />
 
@@ -71,12 +75,12 @@
                     android:layout_width="200dp"
                     android:layout_height="208dp"
                     android:layout_marginStart="97dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="114dp"
                     android:layout_marginBottom="10dp"
                     app:layout_constraintBottom_toTopOf="@+id/restaurantUserName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.478"
+                    app:layout_constraintHorizontal_bias="0.525"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/food_junction_1__1_" />
