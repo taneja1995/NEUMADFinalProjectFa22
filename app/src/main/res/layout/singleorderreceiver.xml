@@ -8,12 +8,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/cust_img_cv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/food_junction_1"
+        android:layout_width="57dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/food_junction_1__1_"
         app:layout_constraintStart_toStartOf="@id/order_no"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,24 +22,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:singleLine="true"
         android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@id/date_of_order"
         app:layout_constraintStart_toEndOf="@id/cust_img_cv"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/order_no"
         style="@style/TextAppearance.AppCompat.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_width="153dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
         android:background="#ccffffff"
         android:text="#123456789012"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@id/cust_img_cv"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cust_img_cv" />
 
     <TextView
         android:id="@+id/date_of_order"
@@ -48,7 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:text="29/11/2019"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
         style="@style/TextAppearance.AppCompat.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="28dp"
         android:text="order status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_of_order" />
@@ -79,9 +80,10 @@
         android:id="@+id/divider2"
         android:layout_width="409dp"
         android:layout_height="1dp"
+        android:layout_marginTop="7dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="@id/order_no"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_no" />
 
     <Button
         android:id="@+id/routeIt"
@@ -89,12 +91,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="9dp"
         android:text="View"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/order_no"
-        app:layout_constraintTop_toBottomOf="@+id/order_status" />
+        app:layout_constraintTop_toBottomOf="@+id/order_status"
+        app:layout_constraintVertical_bias="0.473" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
