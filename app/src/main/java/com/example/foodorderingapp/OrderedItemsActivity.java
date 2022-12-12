@@ -114,6 +114,7 @@ public class OrderedItemsActivity extends AppCompatActivity {
 
     public void goToChat(View view){
         Intent intent = new Intent(this, ChatActivity.class);
+        ((MyApplication) this.getApplication()).setOrigin("restaurants");
         intent.putExtra("origin","restaurant");
         startActivity(intent);
     }
