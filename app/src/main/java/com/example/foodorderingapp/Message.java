@@ -35,7 +35,7 @@ public class Message {
         return sender;
     }
 
-    public void setSender(String username) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 }

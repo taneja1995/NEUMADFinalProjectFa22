@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ChatActivityAdapter extends RecyclerView.Adapter{
+public class ChatActivityAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private List<Message> messageList;
-    private int sender_view= 1;
-    private int receiver_view=0;
+    private int sender_view = 1;
+    private int receiver_view = 0;
 
-    public ChatActivityAdapter(List<Message> messageList, Context context){
+    public ChatActivityAdapter(List<Message> messageList, Context context) {
 
-        this.context=context;
-        this.messageList=messageList;
+        this.context = context;
+        this.messageList = messageList;
     }
 
 
@@ -29,12 +29,11 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if(viewType == sender_view){
+        if (viewType == sender_view) {
             return new
                     ChatActivityAdapter.SentMessageHolder(LayoutInflater.from(context).inflate(R.layout.activity_sender_item, null));
 
-        }
-        else{
+        } else {
             return new
                     ChatActivityAdapter.ReceivedMessageHolder(LayoutInflater.from(context).inflate(R.layout.activity_receiver_item, null));
 
@@ -43,14 +42,21 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-         Message message= messageList.get(position);
-        String name= ((MyApplication) context.getApplicationContext()).getUserName();
-         if(message.getSender().equals(name)){
-             ((SentMessageHolder)holder).sentMessage.setText(message.getMessage());
-         }
-         else{
-             ((ReceivedMessageHolder)holder).receivedMessage.setText(message.getMessage());
-         }
+        Message message = messageList.get(position);
+        String name = ((MyApplication) context.getApplicationContext()).getUserName();
+        if (((MyApplication) context.getApplicationContext()).getOrigin().equals("users")) {
+            if (message.getSender().equals(name)) {
+                ((SentMessageHolder) holder).sentMessage.setText(message.getMessage());
+            } else {
+                ((ReceivedMessageHolder) holder).receivedMessage.setText(message.getMessage());
+            }
+        }else{
+            if (message.getSender().equals(name)) {
+                ((ReceivedMessageHolder) holder).receivedMessage.setText(message.getMessage());
+            } else {
+                ((SentMessageHolder) holder).sentMessage.setText(message.getMessage());
+            }
+        }
     }
 
     @Override
@@ -59,15 +65,24 @@ public class ChatActivityAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public int getItemViewType(int position){
+    public int getItemViewType(int position) {
 
-        Message message= messageList.get(position);
-        String name= ((MyApplication) context.getApplicationContext()).getUserName();
-        if(message.getSender().equals(name)) {
-            return sender_view;
-        }
-        else{
-            return receiver_view;
+        Message message = messageList.get(position);
+        String name = ((MyApplication) context.getApplicationContext()).getUserName();
+        if (((MyApplication) context.getApplicationContext()).getOrigin().equals("users")) {
+            if (message.getSender().equals(name)) {
+                return sender_view;
+            } else {
+                return receiver_view;
+            }
+        } else {
+
+            if (message.getSender().equals(name)) {
+                return receiver_view;
+            } else {
+                return sender_view;
+            }
+
         }
     }
 
