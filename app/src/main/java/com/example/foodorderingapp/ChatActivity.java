@@ -77,6 +77,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         reference.child(id).setValue(message);
+        inputMess.setText("");
     }
 
     private void addDataItem() {
