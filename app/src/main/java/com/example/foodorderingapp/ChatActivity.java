@@ -83,11 +83,15 @@ public class ChatActivity extends AppCompatActivity {
                     String messg= String.valueOf(snapshot.child("message").getValue());
                     String sender= String.valueOf(snapshot.child("sender").getValue());
                     String receiver= String.valueOf(snapshot.child("receiver").getValue());
+                    if (receiver.equals(((MyApplication) getApplication()).getUserName()) || sender.equals(((MyApplication) getApplication()).getUserName()))
+                    {
                     message.setMessage(messg);
                     message.setSender(sender);
                     message.setReceiver(receiver);
                     messageList.add(message);
                     chatActivityAdapter.notifyDataSetChanged();
+                    }
+
 
                 }
             }

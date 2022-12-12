@@ -5,7 +5,7 @@ import android.app.Application;
 import java.util.HashMap;
 
 public class MyApplication extends Application {
-        public String UserName;
+        public static String UserName;
         public String UserId;
         public String RestaurantLatitude,RestaurantLongitude;
 
