@@ -71,7 +71,7 @@ public class RestorderReceiverActivity extends AppCompatActivity {
                     String hotelId = (snapshot.child("hotelId").getValue()).toString();
                     String completionStatus = (snapshot.child("completionStatus").getValue()).toString();
 
-                    if(hotelId.equals(restaurantName)){
+                    if(hotelId.equalsIgnoreCase(restaurantName)){
 
                         order = new Order();
                         order.setOrderNo(orderNo);
