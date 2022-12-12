@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         long difference = Math.abs(ChronoUnit.MILLIS.between(currentTime, givenTime));
 
         long diffSeconds = difference / 1000 ;
-        if(diffSeconds>100){
+        if(diffSeconds<100){
             System.out.println("aaaaa");
             return true;
         }
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                     String time = String.valueOf(snapshot.child("orderedOn").getValue());
                     String orderDetails = String.valueOf(snapshot.child("orderedItems").getValue());
 
-                    if (user.equals(username) && checkTime(time)) {
+                    if (user.equals(username) && checkTime(time) && completionStatus.equals("Completed")) {
                         for(String od:orderDetails.split("/")){
                             OrderedItem orderedItem=new OrderedItem();
                             String[] temp = od.split(";");
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Notification noti = new NotificationCompat.Builder(this,channelId)
 
-                .setContentTitle("Sticker")
+                .setContentTitle("Food Junction")
                 .setContentText(" You usually order this "+ item +" at from "+hotel+" this time.")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .addAction(R.drawable.gender_checked_background, "And more", pPresenetIntent).build();
@@ -199,18 +199,9 @@ public class LoginActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                // Check if the condition is met
-                count[0]++;
-                if (count[0] >5) {
-                    // If the condition is met, remove the Runnable from the MessageQueue
-                    handler.removeCallbacks(this);
-                    return;
-                }
-
-                System.out.println("aaaaaaa");
                 getDataFirebase();
                 // Post the Runnable again after 10 seconds
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 100000);
             }
         };
 
