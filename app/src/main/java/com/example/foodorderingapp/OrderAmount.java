@@ -44,7 +44,7 @@ public class OrderAmount extends AppCompatActivity {
         totalCost= (((MyApplication) this.getApplication()).getSubTotal()+10+2);
         order.setTotalCost(decimalFormat.format(totalCost));
         StringBuilder orderedItems=new StringBuilder();
-        Map<String,String> map = ((MyApplication) this.getApplication()).OrderD;
+        Map<String,String> map = ((MyApplication) this.getApplication()).getOrderD();
         for(String key :map.keySet()){
             orderedItems.append(key);
             orderedItems.append(";");
