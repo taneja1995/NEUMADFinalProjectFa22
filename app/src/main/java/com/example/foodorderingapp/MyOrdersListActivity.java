@@ -66,26 +66,24 @@ public class MyOrdersListActivity extends AppCompatActivity {
                 orderList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     order= new Order();
-                    String orderName=snapshot.getKey();
-                    String resName= String.valueOf(snapshot.child("hotelId").getValue());
-                    String cost= String.valueOf(snapshot.child("totalCost").getValue());
-                    String timestamp= String.valueOf(snapshot.child("orderedOn").getValue());
                     String orderedBy= String.valueOf(snapshot.child("orderedBy").getValue());
-                    String status= String.valueOf(snapshot.child("completionStatus").getValue());
-                    order.setTotalCost(cost);
-                    order.setHotelId(resName);
-                    order.setOrderedOn(timestamp);
-                    order.setOrderNo(snapshot.getKey());
-                    order.setOrderedBy(orderedBy);
-                    order.setCompletionStatus(status);
-                    orderList.add(order);
-                    ordersListAdapter.notifyDataSetChanged();
+                    if(orderedBy.equals(((MyApplication) getApplication()).getUserName())) {
 
-                    System.out.println("G loggedinuser"+loggedInUser);
-                    System.out.println("G  orderedby"+orderedBy);
-                    System.out.println("G  orderkd"+orderId);
-                    System.out.println("NG orderid"+orderName);
+                        String orderName = snapshot.getKey();
+                        String resName = String.valueOf(snapshot.child("hotelId").getValue());
+                        String cost = String.valueOf(snapshot.child("totalCost").getValue());
+                        String timestamp = String.valueOf(snapshot.child("orderedOn").getValue());
 
+                        String status = String.valueOf(snapshot.child("completionStatus").getValue());
+                        order.setTotalCost(cost);
+                        order.setHotelId(resName);
+                        order.setOrderedOn(timestamp);
+                        order.setOrderNo(snapshot.getKey());
+                        order.setOrderedBy(orderedBy);
+                        order.setCompletionStatus(status);
+                        orderList.add(order);
+                        ordersListAdapter.notifyDataSetChanged();
+                    }
                     }
 
                 }
