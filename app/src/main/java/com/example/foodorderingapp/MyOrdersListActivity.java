@@ -49,7 +49,7 @@ public class MyOrdersListActivity extends AppCompatActivity {
         ordersListAdapter = new MyOrdersListAdapter( orderList,this);
         addDataItem();
         displayRecyclerView();
-        createNotificationChannel();
+
     }
 
     private void displayRecyclerView() {
@@ -86,9 +86,6 @@ public class MyOrdersListActivity extends AppCompatActivity {
                     System.out.println("G  orderkd"+orderId);
                     System.out.println("NG orderid"+orderName);
 
-
-                     if(orderedBy.equals(loggedInUser))
-                        sendNotification();
                     }
 
                 }
@@ -100,43 +97,8 @@ public class MyOrdersListActivity extends AppCompatActivity {
         });
     }
 
-    public void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id), name, importance);
-            channel.setDescription(description);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    public void sendNotification(){
-
-        Intent intent = new Intent(this, ReceiveNotificationActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_IMMUTABLE);
-
-        Intent intentPresent = new Intent(this, MyOrdersListActivity.class);
-        PendingIntent pPresenetIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intentPresent, PendingIntent.FLAG_IMMUTABLE);
-
-        String channelId = getString(R.string.channel_id);
 
 
-        Notification noti = new NotificationCompat.Builder(this,channelId)
-
-                .setContentTitle("Order Status")
-                .setContentText("Hey " +loggedInUser +" Your order is in progess")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentIntent(pIntent)
-                .addAction(R.drawable.gender_checked_background, "And more", pPresenetIntent).build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        noti.flags |= Notification.FLAG_AUTO_CANCEL ;
-
-        notificationManager.notify(0, noti);
-
-    }
 
 
 
