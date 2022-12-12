@@ -133,6 +133,8 @@ public class ProgressBarActivity extends AppCompatActivity {
     }
     public void goToChatScreen(View view){
         Intent intent = new Intent(this, ChatActivity.class);
+        ((MyApplication) this.getApplication()).setOrigin("users");
+        intent.putExtra("origin","users");
         startActivity(intent);
     }
 }

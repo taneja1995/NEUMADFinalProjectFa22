@@ -32,6 +32,7 @@ public class ChatActivity extends AppCompatActivity {
     Message message= new Message();
     Button sendMessBtn;
     EditText inputMess;
+    String origin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
         chatActivityAdapter = new ChatActivityAdapter( messageList,this);
         sendMessBtn= findViewById(R.id.send_btn);
         inputMess= findViewById(R.id.input_message);
-
+        origin= getIntent().getStringExtra("origin");
         sendMessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,8 +68,14 @@ public class ChatActivity extends AppCompatActivity {
         String id = reference.push().getKey();
         message.setSentOn(currentTime.toString());
         message.setMessage(inputMess.getText().toString());
-        message.setSender(((MyApplication) this.getApplication()).getUserName());
-        message.setReceiver(((MyApplication) this.getApplication()).getRestaurantName());
+        if(origin.equals("users")){
+            message.setSender(((MyApplication) this.getApplication()).getUserName());
+            message.setReceiver(((MyApplication) this.getApplication()).getRestaurantName());
+        }else{
+            message.setSender(((MyApplication) this.getApplication()).getRestaurantName());
+            message.setReceiver(((MyApplication) this.getApplication()).getUserName());
+        }
+
         reference.child(id).setValue(message);
     }
 
@@ -83,11 +90,21 @@ public class ChatActivity extends AppCompatActivity {
                     String messg= String.valueOf(snapshot.child("message").getValue());
                     String sender= String.valueOf(snapshot.child("sender").getValue());
                     String receiver= String.valueOf(snapshot.child("receiver").getValue());
+
+
+                    if (receiver.equals(((MyApplication) getApplication()).getUserName())
+                            || sender.equals(((MyApplication) getApplication()).getUserName()) &&
+                    sender.equals(((MyApplication) getApplication()).getRestaurantName())  ||
+                            receiver.equals(((MyApplication) getApplication()).getRestaurantName())
+                    )
+                    {
                     message.setMessage(messg);
                     message.setSender(sender);
                     message.setReceiver(receiver);
                     messageList.add(message);
                     chatActivityAdapter.notifyDataSetChanged();
+                    }
+
 
                 }
             }

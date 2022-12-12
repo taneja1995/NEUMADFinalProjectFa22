@@ -27,7 +27,7 @@ public class OrderedItemsActivity extends AppCompatActivity {
 
     private List<OrderedItem> orderedItemList = new ArrayList<OrderedItem>();
     private String orderId="";
-    com.example.foodorderingapp.MyApplication myApplication;
+    MyApplication application;
 
 
     RecyclerView orderedItemsRecyclerView;
@@ -87,6 +87,10 @@ public class OrderedItemsActivity extends AppCompatActivity {
 
                 order = new Order();
                 String orderDetails = String.valueOf(dataSnapshot.child("orderedItems").getValue());
+                String hotelName= String.valueOf(dataSnapshot.child("hotelId").getValue());
+                String orderedBy= String.valueOf(dataSnapshot.child("orderedBy").getValue());
+                ((MyApplication) getApplication()).setRestaurantName(hotelName);
+                ((MyApplication) getApplication()).setUserName(orderedBy);
 
                 for(String od:orderDetails.split("/")){
                     OrderedItem orderedItem=new OrderedItem();
@@ -102,7 +106,17 @@ public class OrderedItemsActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+
+
         });
+    }
+
+
+    public void goToChat(View view){
+        Intent intent = new Intent(this, ChatActivity.class);
+        ((MyApplication) this.getApplication()).setOrigin("restaurants");
+        intent.putExtra("origin","restaurant");
+        startActivity(intent);
     }
 
 }

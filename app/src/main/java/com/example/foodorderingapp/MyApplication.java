@@ -5,10 +5,19 @@ import android.app.Application;
 import java.util.HashMap;
 
 public class MyApplication extends Application {
-        public String UserName;
+        public static String UserName;
         public String UserId;
         public String RestaurantLatitude,RestaurantLongitude;
 
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String origin;
         public static String RestaurantName;
 
     public String getMostFrequentRestaurantName() {
